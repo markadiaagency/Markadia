@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markadia — Designed to Make a Mark.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@700;800;900&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --indigo: #062ff8;
+    --indigo-dim: #0a28cc;
+    --indigo-glow: rgba(6,47,248,0.35);
+    --cyan: #8ef9fb;
+    --cyan-dim: rgba(142,249,251,0.12);
+    --white: #ffffff;
+    --off-white: #dce0f0;
+    --navy: #0e1221;
+    --mid: #151929;
+    --border: rgba(255,255,255,0.07);
+    --text-muted: rgba(255,255,255,0.45);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 2px; }
+
+  /* ── PAGE LOADER ── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+
+  #loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .loader-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--indigo);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+    animation: loader-pulse 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes loader-pulse {
+    from { opacity: 0.5; transform: scale(0.95); }
+    to   { opacity: 1;   transform: scale(1.05); }
+  }
+
+  .loader-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .loader-bar-track {
+    width: 180px;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .loader-bar-fill {
+    height: 100%;
+    background: var(--indigo);
+    border-radius: 2px;
+    width: 0%;
+    animation: loader-fill 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+
+  @keyframes loader-fill {
+    0%   { width: 0%; }
+    60%  { width: 75%; }
+    100% { width: 100%; }
+  }
+
+  .loader-tagline {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fade-up 0.5s 0.3s ease forwards;
+  }
+
+  /* ── CURSOR SPOTLIGHT ── */
+  #spotlight {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(6,47,248,0.10) 0%, rgba(6,47,248,0.04) 35%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  /* ── TYPED TEXT ── */
+  .hero-typed-line {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fade-up 0.7s 0.55s ease forwards;
+  }
+
+  .typed-word {
+    color: var(--cyan);
+    min-width: 2px;
+  }
+
+  .typed-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background: var(--cyan);
+    margin-left: 1px;
+    vertical-align: middle;
+    animation: blink 0.75s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* ── MAGNETIC BUTTON BASE ── */
+  .btn-primary, .btn-ghost {
+    will-change: transform;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.23,1,0.32,1) !important;
+  }
+
+  /* ─────────────────────────────────────────────
+     NAV
+  ───────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: padding 0.3s ease;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--indigo);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .nav-icon::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: var(--black);
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 65% 100%, 0 100%);
+  }
+
+  .nav-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--indigo);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 3px;
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--indigo-dim) !important;
+    transform: translateY(-1px);
+    color: var(--white) !important;
+  }
+
+  /* ─────────────────────────────────────────────
+     HERO
+  ───────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 140px 60px 80px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(6,47,248,0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(142,249,251,0.06) 0%, transparent 55%),
+      linear-gradient(160deg, #000 0%, #0a0c1a 50%, #000 100%);
+  }
+
+  /* Animated grid */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(6,47,248,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6,47,248,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 80% 50%, black 0%, transparent 70%);
+    animation: grid-drift 20s linear infinite;
+  }
+
+  @keyframes grid-drift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orb-float 8s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(6,47,248,0.18) 0%, transparent 70%);
+    top: -10%; right: -5%;
+    animation-duration: 10s;
+  }
+
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(142,249,251,0.08) 0%, transparent 70%);
+    bottom: 10%; right: 30%;
+    animation-duration: 7s;
+    animation-delay: -3s;
+  }
+
+  @keyframes orb-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fade-up 0.7s 0.2s ease forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .hero-h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(64px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fade-up 0.8s 0.35s ease forwards;
+  }
+
+  .hero-h1 .accent {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--indigo);
+    display: block;
+  }
+
+  .hero-h1 .filled { color: var(--white); }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--off-white);
+    max-width: 520px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fade-up 0.8s 0.5s ease forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fade-up 0.8s 0.65s ease forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--indigo);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 0 0 var(--indigo-glow);
+  }
+
+  .btn-primary:hover {
+    background: var(--indigo-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--indigo-glow);
+  }
+
+  .btn-primary .arrow {
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--off-white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.25);
+    color: var(--white);
+  }
+
+  /* Hero scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fade-up 1s 1.2s ease forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--indigo));
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .scroll-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    writing-mode: vertical-rl;
+  }
+
+  /* ─────────────────────────────────────────────
+     TICKER
+  ───────────────────────────────────────────── */
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--navy);
+    padding: 14px 0;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    animation: ticker 30s linear infinite;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .ticker-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--indigo);
+    flex-shrink: 0;
+  }
+
+  /* ─────────────────────────────────────────────
+     SECTIONS SHARED
+  ───────────────────────────────────────────── */
+  section {
+    padding: 110px 60px;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--indigo);
+    margin-bottom: 20px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--indigo);
+  }
+
+  .section-h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .section-lead {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--off-white);
+    max-width: 600px;
+  }
+
+  /* ─────────────────────────────────────────────
+     ABOUT
+  ───────────────────────────────────────────── */
+  #about {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-left .section-h2 { margin-bottom: 28px; }
+
+  .about-left .section-lead { margin-bottom: 40px; }
+
+  .about-stat-row {
+    display: flex;
+    gap: 50px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-stat { display: flex; flex-direction: column; gap: 4px; }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 46px;
+    color: var(--indigo);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-value-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .about-value-card:hover {
+    border-color: rgba(6,47,248,0.3);
+    background: rgba(6,47,248,0.04);
+  }
+
+  .value-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(6,47,248,0.12);
+    border: 1px solid rgba(6,47,248,0.25);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .value-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .value-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* ─────────────────────────────────────────────
+     SERVICES
+  ───────────────────────────────────────────── */
+  #services {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+  }
+
+  .services-header {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .services-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--black);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--indigo);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover { background: rgba(6,47,248,0.04); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--indigo);
+  }
+
+  .service-icon {
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* ─────────────────────────────────────────────
+     WHY MARKADIA
+  ───────────────────────────────────────────── */
+  #why {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #why::before {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(6,47,248,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .why-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .why-point {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .why-num {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--indigo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--indigo);
+    flex-shrink: 0;
+  }
+
+  .why-text h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .why-text p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* Markets */
+  .markets-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .market-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .market-card:hover {
+    border-color: rgba(6,47,248,0.35);
+    transform: translateX(6px);
+  }
+
+  .market-left { display: flex; align-items: center; gap: 18px; }
+
+  .market-flag {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .market-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .market-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .market-arrow {
+    color: var(--indigo);
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .market-card:hover .market-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* ─────────────────────────────────────────────
+     CTA SECTION
+  ───────────────────────────────────────────── */
+  #cta {
+    padding: 140px 60px;
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(6,47,248,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+  }
+
+  .cta-h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+
+  .cta-h2 span {
+    color: var(--indigo);
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--off-white);
+    margin-bottom: 48px;
+  }
+
+  /* ─────────────────────────────────────────────
+     FOOTER
+  ───────────────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 50px 60px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .footer-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--indigo);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+  }
+
+  .footer-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-copy span { color: var(--indigo); }
+
+  /* ─────────────────────────────────────────────
+     ANIMATIONS
+  ───────────────────────────────────────────── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─────────────────────────────────────────────
+     HOW WE WORK
+  ───────────────────────────────────────────── */
+  #process {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #process::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(6,47,248,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .process-header {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+    text-align: center;
+  }
+
+  .process-steps {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* connecting line between steps */
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 38px;
+    left: calc(12.5% + 10px);
+    right: calc(12.5% + 10px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--indigo), rgba(6,47,248,0.2));
+    z-index: 0;
+  }
+
+  .process-step {
+    padding: 0 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .step-bubble {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 1px solid rgba(6,47,248,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .process-step:hover .step-bubble {
+    border-color: var(--indigo);
+    background: rgba(6,47,248,0.12);
+    transform: translateY(-4px);
+  }
+
+  .step-num {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    background: var(--indigo);
+    border-radius: 50%;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .step-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 200px;
+  }
+
+  /* ── WHATSAPP BUTTON ── */
+  .whatsapp-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 600;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #25d366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: wa-pop 0.5s 1.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+
+  .whatsapp-fab:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.55);
+  }
+
+  .whatsapp-fab svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+  }
+
+  /* Pulse ring */
+  .whatsapp-fab::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(37,211,102,0.4);
+    animation: wa-pulse 2.5s ease-out infinite;
+  }
+
+  @keyframes wa-pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  @keyframes wa-pop {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* ── SOCIAL LINKS (footer) ── */
+  .footer-socials {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 14px;
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: var(--indigo);
+    color: var(--white);
+    background: rgba(6,47,248,0.1);
+  }
+
+  /* ─────────────────────────────────────────────
+     RESPONSIVE
+  ───────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    nav, section, #cta, footer { padding-left: 40px; padding-right: 40px; }
+    .about-grid, .why-inner { grid-template-columns: 1fr; gap: 50px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .process-steps::before { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, #cta, footer { padding-left: 24px; padding-right: 24px; }
+    #hero { padding: 120px 24px 70px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .about-stat-row { gap: 30px; }
+    .scroll-hint { left: 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-nav { flex-wrap: wrap; gap: 20px; }
+    .whatsapp-fab { bottom: 20px; right: 20px; width: 52px; height: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── PAGE LOADER ── -->
+<div id="loader">
+  <div class="loader-brand">
+    <div class="loader-icon"></div>
+    <span class="loader-wordmark">Markadia</span>
+  </div>
+  <div class="loader-bar-track">
+    <div class="loader-bar-fill"></div>
+  </div>
+  <span class="loader-tagline">Designed to Make a Mark.</span>
+</div>
+
+<!-- ── CURSOR SPOTLIGHT ── -->
+<div id="spotlight"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-icon"></div>
+    <span class="nav-wordmark">Markadia</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" class="nav-cta">Start a Project</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Arabic-Market Marketing Agency</div>
+    <h1 class="hero-h1">
+      <span class="filled">Designed</span>
+      <span class="accent">To Make</span>
+      <span class="filled">A Mark.</span>
+    </h1>
+    <div class="hero-typed-line">
+      We specialize in&nbsp;<span class="typed-word" id="typed-word"></span><span class="typed-cursor"></span>
+    </div>
+    <p class="hero-sub">
+      We build bold marketing presences for brands ready to own Egypt, Saudi Arabia, and the UAE. Strategy. Content. Results.
+    </p>
+    <div class="hero-actions">
+      <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" class="btn-primary">
+        Start a Project <span class="arrow">→</span>
+      </a>
+      <a href="#services" class="btn-ghost">See Our Work ↓</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <!-- first copy -->
+    <span class="ticker-item"><span class="ticker-dot"></span>Content Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Visual Content Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Copywriting</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Publishing & Scheduling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Community Management</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Analytics & Reporting</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Egypt · Saudi Arabia · UAE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Designed to Make a Mark</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span>Content Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Visual Content Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Copywriting</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Publishing & Scheduling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Community Management</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Analytics & Reporting</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Egypt · Saudi Arabia · UAE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Designed to Make a Mark</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-h2">We Don't Do<br>Average.</h2>
+      <p class="section-lead">
+        Markadia is a digital marketing agency built specifically for Arabic-speaking markets. We combine regional insight with bold creative execution to make brands impossible to ignore — in Egypt, Saudi Arabia, and the UAE.
+      </p>
+      <div class="about-stat-row">
+        <div class="about-stat">
+          <span class="stat-num" data-target="3">0</span>
+          <span class="stat-label">Key Markets</span>
+        </div>
+        <div class="about-stat">
+          <span class="stat-num" data-target="6">0</span>
+          <span class="stat-label">Core Services</span>
+        </div>
+        <div class="about-stat">
+          <span class="stat-num" data-target="100" data-suffix="%">0</span>
+          <span class="stat-label">Commitment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right reveal">
+      <div class="about-value-card">
+        <div class="value-icon">🎯</div>
+        <div>
+          <div class="value-name">Clarity First</div>
+          <div class="value-desc">Every strategy we build has a clear objective. No fluff, no filler — just direction that drives results.</div>
+        </div>
+      </div>
+      <div class="about-value-card">
+        <div class="value-icon">⚡</div>
+        <div>
+          <div class="value-name">Bold Execution</div>
+          <div class="value-desc">We make moves that get noticed. Safe is invisible — we're here to make your brand impossible to scroll past.</div>
+        </div>
+      </div>
+      <div class="about-value-card">
+        <div class="value-icon">🌍</div>
+        <div>
+          <div class="value-name">Regional Depth</div>
+          <div class="value-desc">We know the culture, the language, the nuance. Your content will feel native — because it is.</div>
+        </div>
+      </div>
+      <div class="about-value-card">
+        <div class="value-icon">📈</div>
+        <div>
+          <div class="value-name">Growth-Driven</div>
+          <div class="value-desc">Aesthetics mean nothing without performance. Everything we create is built to move the needle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-h2">Six Ways We<br>Build Your Brand.</h2>
+    </div>
+    <p class="section-lead" style="max-width: 340px;">
+      Every service is built to work together — from first idea to final report.
+    </p>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <div class="service-icon">🗺️</div>
+      <div class="service-name">Content Strategy</div>
+      <p class="service-desc">Research-backed plans that align your brand voice, audience, and goals into one clear roadmap.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <div class="service-icon">🎨</div>
+      <div class="service-name">Visual Content Design</div>
+      <p class="service-desc">Scroll-stopping visuals designed for Arabic-speaking audiences — posts, reels, stories, and beyond.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <div class="service-icon">✍️</div>
+      <div class="service-name">Copywriting</div>
+      <p class="service-desc">Words that hit. Captions, ads, bios — written in Arabic and English, calibrated for your market.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">04</span>
+      <div class="service-icon">📅</div>
+      <div class="service-name">Publishing & Scheduling</div>
+      <p class="service-desc">Consistent, optimized posting across all platforms so you never go dark when the algorithm rewards you.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">05</span>
+      <div class="service-icon">💬</div>
+      <div class="service-name">Community Management</div>
+      <p class="service-desc">Real conversations, real relationships. We manage your audience so every comment becomes a connection.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">06</span>
+      <div class="service-icon">📊</div>
+      <div class="service-name">Analytics & Reporting</div>
+      <p class="service-desc">Clear monthly reports showing what's working, what's growing, and where the next opportunity lives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW WE WORK ── -->
+<section id="process">
+  <div class="process-header reveal">
+    <div class="section-label" style="justify-content: center;">How We Work</div>
+    <h2 class="section-h2">Four Steps.<br>One Mark.</h2>
+    <p class="section-lead" style="margin: 16px auto 0; text-align: center;">
+      We run a tight, transparent process — from your first brief to your last report. No guesswork, no delays.
+    </p>
+  </div>
+
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-bubble">
+        🔍
+        <span class="step-num">1</span>
+      </div>
+      <div class="step-title">Discovery</div>
+      <p class="step-desc">We learn your brand, your goals, your audience, and the markets you're targeting — inside out.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-bubble">
+        🗺️
+        <span class="step-num">2</span>
+      </div>
+      <div class="step-title">Strategy</div>
+      <p class="step-desc">We build a content roadmap: what to post, where to post it, when, and why — tied to real objectives.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-bubble">
+        ✨
+        <span class="step-num">3</span>
+      </div>
+      <div class="step-title">Creation</div>
+      <p class="step-desc">Our team produces visuals, copy, and content calendars — reviewed and approved before a single post goes live.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-bubble">
+        📈
+        <span class="step-num">4</span>
+      </div>
+      <div class="step-title">Growth & Report</div>
+      <p class="step-desc">We publish, manage the community, track performance, and deliver clear monthly reports — then optimize.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY MARKADIA ── -->
+<section id="why">
+  <div class="why-inner">
+    <div class="reveal">
+      <div class="section-label">Why Markadia</div>
+      <h2 class="section-h2">The Difference<br>Is Strategy.</h2>
+      <p class="section-lead">
+        Most agencies treat the Arab world as one market. We know better. Egypt, Saudi Arabia, and the UAE each have their own pulse — and we know how to hit it.
+      </p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-num">1</div>
+          <div class="why-text">
+            <h4>Built for Arabic Markets</h4>
+            <p>Native language, native culture. Not translated — actually written for the audience you're speaking to.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-num">2</div>
+          <div class="why-text">
+            <h4>Strategy Before Content</h4>
+            <p>We don't post for the sake of posting. Every piece of content has a purpose, a placement, and a metric.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-num">3</div>
+          <div class="why-text">
+            <h4>Full-Service, One Team</h4>
+            <p>From ideation to analytics — you get one cohesive team, not five agencies pointing fingers at each other.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="section-label" style="margin-bottom: 30px;">Markets We Serve</div>
+      <div class="markets-stack">
+        <div class="market-card">
+          <div class="market-left">
+            <span class="market-flag">🇪🇬</span>
+            <div>
+              <div class="market-name">Egypt</div>
+              <div class="market-sub">The Arab world's biggest digital audience</div>
+            </div>
+          </div>
+          <span class="market-arrow">→</span>
+        </div>
+        <div class="market-card">
+          <div class="market-left">
+            <span class="market-flag">🇸🇦</span>
+            <div>
+              <div class="market-name">Saudi Arabia</div>
+              <div class="market-sub">The region's fastest-growing market</div>
+            </div>
+          </div>
+          <span class="market-arrow">→</span>
+        </div>
+        <div class="market-card">
+          <div class="market-left">
+            <span class="market-flag">🇦🇪</span>
+            <div>
+              <div class="market-name">UAE</div>
+              <div class="market-sub">The hub for ambitious brands</div>
+            </div>
+          </div>
+          <span class="market-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="cta-inner reveal">
+    <div class="cta-eyebrow">✦ Ready to Start?</div>
+    <h2 class="cta-h2">Let's Make<br><span>Your Mark.</span></h2>
+    <p class="cta-sub">
+      One conversation could be the beginning of your brand's most visible chapter. Let's talk.
+    </p>
+    <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" class="btn-primary" style="font-size: 14px; padding: 18px 42px;">
+      Start a Project <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="#" class="footer-brand">
+        <div class="footer-icon"></div>
+        <span class="footer-wordmark">Markadia</span>
+      </a>
+      <div style="margin-top: 8px;">
+        <span class="footer-tagline">Designed to Make a Mark.</span>
+      </div>
+      <div class="footer-socials">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" class="social-link" title="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="social-link" title="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="#" class="social-link" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="#" class="social-link" title="TikTok">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <ul class="footer-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener">Facebook</a></li>
+    </ul>
+
+    <div class="footer-copy">
+      © 2025 <span>Markadia</span>. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ── WHATSAPP FLOATING BUTTON ── -->
+<a href="https://wa.me/message/markadia" target="_blank" rel="noopener" class="whatsapp-fab" title="Chat with us on WhatsApp" aria-label="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  /* ══════════════════════════════════════
+     1. PAGE LOADER
+  ══════════════════════════════════════ */
+  const loader = document.getElementById('loader');
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 1600);
+  });
+  document.body.style.overflow = 'hidden';
+
+  /* ══════════════════════════════════════
+     2. CURSOR SPOTLIGHT
+  ══════════════════════════════════════ */
+  const spotlight = document.getElementById('spotlight');
+  let spotX = window.innerWidth / 2, spotY = window.innerHeight / 2;
+  let curSpotX = spotX, curSpotY = spotY;
+  let spotVisible = false;
+
+  document.addEventListener('mousemove', e => {
+    spotX = e.clientX;
+    spotY = e.clientY;
+    if (!spotVisible) {
+      spotlight.style.opacity = '1';
+      spotVisible = true;
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    spotlight.style.opacity = '0';
+    spotVisible = false;
+  });
+
+  function animateSpotlight() {
+    curSpotX += (spotX - curSpotX) * 0.08;
+    curSpotY += (spotY - curSpotY) * 0.08;
+    spotlight.style.left = curSpotX + 'px';
+    spotlight.style.top  = curSpotY + 'px';
+    requestAnimationFrame(animateSpotlight);
+  }
+  animateSpotlight();
+
+  /* ══════════════════════════════════════
+     3. TYPED TEXT HERO
+  ══════════════════════════════════════ */
+  const typedEl = document.getElementById('typed-word');
+  const words = [
+    'Content Strategy',
+    'Visual Design',
+    'Copywriting',
+    'Community Management',
+    'Analytics & Reporting'
+  ];
+  let wIdx = 0, cIdx = 0, deleting = false;
+
+  function typeLoop() {
+    const word = words[wIdx];
+    if (!deleting) {
+      typedEl.textContent = word.slice(0, ++cIdx);
+      if (cIdx === word.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1800);
+        return;
+      }
+      setTimeout(typeLoop, 65);
+    } else {
+      typedEl.textContent = word.slice(0, --cIdx);
+      if (cIdx === 0) {
+        deleting = false;
+        wIdx = (wIdx + 1) % words.length;
+        setTimeout(typeLoop, 350);
+        return;
+      }
+      setTimeout(typeLoop, 35);
+    }
+  }
+  setTimeout(typeLoop, 2000);
+
+  /* ══════════════════════════════════════
+     4. SCROLL REVEAL
+  ══════════════════════════════════════ */
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  /* ══════════════════════════════════════
+     5. ANIMATED COUNTERS
+  ══════════════════════════════════════ */
+  const counters = document.querySelectorAll('.stat-num[data-target]');
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el     = entry.target;
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      const dur    = 1400;
+      const step   = 16;
+      const steps  = dur / step;
+      let current  = 0;
+      const inc = target / steps;
+      const tick = setInterval(() => {
+        current = Math.min(current + inc, target);
+        el.textContent = Math.round(current) + suffix;
+        if (current >= target) clearInterval(tick);
+      }, step);
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObs.observe(el));
+
+  /* ══════════════════════════════════════
+     6. PARALLAX (hero orbs + grid)
+  ══════════════════════════════════════ */
+  const orb1   = document.querySelector('.orb-1');
+  const orb2   = document.querySelector('.orb-2');
+  const hGrid  = document.querySelector('.hero-grid');
+  const heroBg = document.querySelector('.hero-bg');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (orb1)   orb1.style.transform   = `translateY(${y * 0.18}px) scale(1)`;
+    if (orb2)   orb2.style.transform   = `translateY(${y * 0.28}px) scale(1)`;
+    if (hGrid)  hGrid.style.transform  = `translateY(${y * 0.12}px)`;
+    if (heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+  }, { passive: true });
+
+  /* ══════════════════════════════════════
+     7. MAGNETIC BUTTONS
+  ══════════════════════════════════════ */
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r  = btn.getBoundingClientRect();
+      const cx = r.left + r.width  / 2;
+      const cy = r.top  + r.height / 2;
+      const dx = (e.clientX - cx) * 0.28;
+      const dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  /* ══════════════════════════════════════
+     8. NAV SHRINK ON SCROLL
+  ══════════════════════════════════════ */
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '14px 60px' : '20px 60px';
+  }, { passive: true });
+
+  /* ══════════════════════════════════════
+     9. SMOOTH ANCHOR SCROLL
+  ══════════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
