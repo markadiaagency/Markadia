@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Markadia</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0ib3V0ZXIiPgogICAgICA8cG9seWdvbiBwb2ludHM9IjAsMCAzMiwwIDMyLDIyLjQgMjIuNCwzMiAwLDMyIi8+CiAgICA8L2NsaXBQYXRoPgogICAgPGNsaXBQYXRoIGlkPSJpbm5lciI+CiAgICAgIDxwb2x5Z29uIHBvaW50cz0iNCw0IDI4LDQgMjgsMTkuNSAxOS41LDI4IDQsMjgiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDwhLS0gT3V0ZXIgaW5kaWdvIHNoYXBlIC0tPgogIDxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzA2MmZmOCIgY2xpcC1wYXRoPSJ1cmwoI291dGVyKSIvPgogIDwhLS0gSW5uZXIgZGFyayBjdXRvdXQgLS0+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDYwYjFhIiBjbGlwLXBhdGg9InVybCgjaW5uZXIpIi8+Cjwvc3ZnPg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--indigo:#062ff8;--cyan:#8ef9fb;--navy:#060b1a;--off-white:#dce0f0;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{overflow-x:hidden;}
+  body{min-height:100vh;background:var(--navy);color:#fff;font-family:'Inter',system-ui,sans-serif;
+       display:flex;align-items:center;justify-content:center;padding:40px 24px;
+       position:relative;overflow-x:hidden;width:100%;}
+  body::before{content:'';position:fixed;width:820px;height:820px;max-width:150vw;max-height:150vw;
+       left:-280px;top:-420px;border-radius:50%;pointer-events:none;
+       background:radial-gradient(circle,rgba(6,47,248,.38) 0%,rgba(6,47,248,.08) 45%,rgba(6,47,248,0) 70%);}
+  body::after{content:'';position:fixed;width:700px;height:700px;max-width:140vw;max-height:140vw;
+       right:-260px;bottom:-380px;border-radius:50%;pointer-events:none;
+       background:radial-gradient(circle,rgba(142,249,251,.14) 0%,rgba(142,249,251,0) 68%);}
+  .card{position:relative;z-index:1;max-width:620px;width:100%;text-align:center;}
+  .mark{width:54px;height:54px;margin:0 auto 28px;display:block;}
+  .code{font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-weight:900;font-size:clamp(88px,20vw,168px);
+        line-height:.86;letter-spacing:-.02em;color:var(--cyan);
+        text-shadow:0 0 46px rgba(142,249,251,.28);}
+  h1{font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-weight:800;text-transform:uppercase;
+     font-size:clamp(26px,6vw,40px);letter-spacing:.01em;margin-top:14px;}
+  p{color:rgba(255,255,255,.58);font-size:clamp(15px,3.4vw,17px);line-height:1.6;
+    margin:16px auto 34px;max-width:430px;}
+  .btn{display:inline-block;font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-weight:700;
+       text-transform:uppercase;letter-spacing:.09em;font-size:18px;text-decoration:none;color:#fff;
+       background:linear-gradient(135deg,var(--indigo),#0a28cc);
+       padding:15px 42px;border-radius:999px;box-shadow:0 8px 30px rgba(6,47,248,.38);
+       transition:transform .2s ease,box-shadow .2s ease;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(6,47,248,.5);}
+  .sep{width:54px;height:2px;margin:32px auto 0;
+       background:linear-gradient(90deg,var(--indigo),var(--cyan));border-radius:2px;}
+  .foot{margin-top:18px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+        color:rgba(255,255,255,.34);}
+  @media (prefers-reduced-motion:reduce){.btn{transition:none;}}
+</style>
+</head>
+<body>
+  <main class="card">
+    <svg class="mark" viewBox="0 0 32 32" role="img" aria-label="Markadia">
+      <defs>
+        <clipPath id="o"><polygon points="0,0 32,0 32,22.4 22.4,32 0,32"/></clipPath>
+        <clipPath id="i"><polygon points="4,4 28,4 28,19.5 19.5,28 4,28"/></clipPath>
+      </defs>
+      <rect width="32" height="32" fill="#062ff8" clip-path="url(#o)"/>
+      <rect width="32" height="32" fill="#060b1a" clip-path="url(#i)"/>
+    </svg>
+    <div class="code">404</div>
+    <h1>This page didn't make its mark</h1>
+    <p>The page you're looking for has moved or never existed. Let's get you back to something that works.</p>
+    <a class="btn" href="/">Back to Markadia</a>
+    <div class="sep"></div>
+    <div class="foot">markadiawave.com</div>
+  </main>
+</body>
+</html>
