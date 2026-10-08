@@ -120,6 +120,9 @@
     text-transform:uppercase;line-height:1}
   .project-cat{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
     color:var(--muted)}
+  .project-brief{max-width:68ch;margin:-14px 0 30px;font-size:16px;line-height:1.8;
+    color:rgba(255,255,255,.58)}
+  @media (max-width:700px){.project-brief{margin:4px 0 24px;font-size:15px}}
   .shot-count{font-size:13px;color:var(--muted);white-space:nowrap}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .shot{position:relative;border:0;padding:0;background:var(--card);border-radius:12px;
@@ -293,6 +296,7 @@
 const PROJECTS = [
   {
     "title": "Smash Burger",
+    "brief": "A new burger spot that needed to look as bold as it tastes — in a market where every competitor posts the same close-up. We built a loud, high-contrast social system: offer-led layouts, bilingual copy, and templates the branch team can keep posting on their own.",
     "cat": "Food & Beverage",
     "shots": [
       "smash-burger-01.jpg",
@@ -308,6 +312,7 @@ const PROJECTS = [
   },
   {
     "title": "Sama School",
+    "brief": "Admissions season, with parents comparing schools side by side. We moved the feed off generic classroom stock and onto one calm visual system — admissions announcements, activity highlights, and value messaging in Arabic and English.",
     "cat": "Education",
     "shots": [
       "sama-school-01.jpg",
@@ -323,6 +328,7 @@ const PROJECTS = [
   },
   {
     "title": "Glowy",
+    "brief": "A skincare brand launching into a feed full of filters and over-promises. We gave it a clean, product-first look — soft palette, generous space, benefit-led copy — so each post reads like a reason to buy, not another ad.",
     "cat": "Beauty & Skincare",
     "shots": [
       "glowy-01.jpg",
@@ -356,6 +362,7 @@ document.getElementById("panel-designs").innerHTML = PROJECTS.map(p => `
       </div>
       <div class="shot-count">${p.shots.length} pieces</div>
     </div>
+    <p class="project-brief">${esc(p.brief)}</p>
     <div class="grid">
       ${p.shots.map(f => {
         const i = flat.findIndex(x => x.file === f);
