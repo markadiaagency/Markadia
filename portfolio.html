@@ -76,15 +76,40 @@
   .mobile-cta{background:var(--indigo);padding:12px 30px;border-radius:100px;font-size:20px!important}
 
   /* ── hero ── */
-  .page-head{padding:170px 60px 56px;max-width:1280px;margin:0 auto}
+  .page-head{padding:132px 60px 34px;max-width:1280px;margin:0 auto}
   .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:600;
     letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
   .eyebrow::before{content:'';width:34px;height:1px;background:var(--cyan)}
-  .page-head h1{font-family:var(--display);font-weight:900;font-size:clamp(52px,9vw,104px);
+  .page-head h1{font-family:var(--display);font-weight:900;font-size:clamp(40px,6.4vw,76px);
     line-height:.92;text-transform:uppercase;text-wrap:balance}
   .page-head h1 span{background:linear-gradient(135deg,var(--indigo),var(--cyan));
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .page-head p{margin-top:20px;max-width:56ch;color:rgba(255,255,255,.6);font-size:17px}
+  .page-head p{margin-top:16px;max-width:60ch;color:rgba(255,255,255,.6);font-size:16px}
+
+  /* ── tabs ── */
+  .tabstrip{max-width:1280px;margin:0 auto;padding:0 60px;border-bottom:1px solid var(--border);
+    display:flex;gap:4px;flex-wrap:wrap}
+  .tab{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    color:rgba(255,255,255,.5);font-family:var(--display);font-weight:700;font-size:20px;
+    text-transform:uppercase;letter-spacing:.05em;padding:12px 18px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:9px;transition:color .2s,border-color .2s}
+  .tab:hover{color:#fff}
+  .tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--indigo)}
+  .tab .soon{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;background:rgba(142,249,251,.13);color:var(--cyan);
+    padding:3px 9px;border-radius:99px}
+  .panel[hidden]{display:none!important}
+  .soon-panel{text-align:center;padding:96px 20px 110px;max-width:60ch;margin:0 auto}
+  .soon-mark{width:54px;height:54px;margin:0 auto 22px;border-radius:14px;
+    background:rgba(6,47,248,.14);border:1px solid rgba(47,86,255,.35);
+    display:flex;align-items:center;justify-content:center;color:var(--cyan)}
+  .soon-panel h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,6vw,48px);
+    text-transform:uppercase;line-height:1}
+  .soon-panel p{color:rgba(255,255,255,.55);margin:14px 0 26px}
+  .soon-link{display:inline-block;font-family:var(--display);font-weight:700;font-size:17px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);
+    border-bottom:1px solid rgba(142,249,251,.4);padding-bottom:3px}
+  .soon-link:hover{color:#fff;border-bottom-color:#fff}
 
   /* ── projects ── */
   main{padding:0 60px 90px;max-width:1280px;margin:0 auto}
@@ -141,7 +166,9 @@
     nav{padding:16px 24px}
     .nav-links{display:none}
     .hamburger{display:flex}
-    .page-head{padding:128px 24px 40px}
+    .page-head{padding:104px 24px 26px}
+    .tabstrip{padding:0 24px}
+    .tab{font-size:17px;padding:11px 13px}
     main{padding:0 24px 70px}
     .grid{grid-template-columns:repeat(2,1fr);gap:12px}
     .tail,footer{padding-left:24px;padding-right:24px}
@@ -157,7 +184,7 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#work">Skip to the work</a>
+<a class="skip-link" href="#panel-designs">Skip to the work</a>
 
 <div class="mobile-nav" id="mobileNav">
   <a href="index.html#about" onclick="closeMobileNav()">About</a>
@@ -193,10 +220,46 @@
 <header class="page-head">
   <div class="eyebrow">Selected Work</div>
   <h1>Brands We<br><span>Made a Mark</span><br>On.</h1>
-  <p>Campaign and content design built to stop the scroll — written, shot and laid out in-house, in Arabic and English, for brands across Egypt and the Gulf.</p>
+  <p>Campaign and content design built to stop the scroll — written, shot and laid out in-house, in Arabic and English, for brands across Egypt and the Gulf. Everything here is design work; video is being added next.</p>
 </header>
 
-<main id="work"></main>
+<div class="tabstrip" role="tablist" aria-label="Types of work">
+  <button class="tab" role="tab" id="tab-designs" aria-controls="panel-designs" aria-selected="true">Designs</button>
+  <button class="tab" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="false" tabindex="-1">
+    AI Videos <span class="soon">Soon</span></button>
+  <button class="tab" role="tab" id="tab-real" aria-controls="panel-real" aria-selected="false" tabindex="-1">
+    Real Videos <span class="soon">Soon</span></button>
+</div>
+
+<main>
+  <div class="panel" id="panel-designs" role="tabpanel" aria-labelledby="tab-designs" tabindex="0"></div>
+
+  <div class="panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0" hidden>
+    <div class="soon-panel">
+      <div class="soon-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="5" width="14" height="14" rx="3"/><path d="m22 8-6 4 6 4V8z"/></svg>
+      </div>
+      <h2>AI Videos</h2>
+      <p>Nothing to show here yet. We're putting a set of AI-made ad pieces together, and they
+         will appear on this tab as they are finished.</p>
+      <a class="soon-link" href="index.html#contact">Ask us about it →</a>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-real" role="tabpanel" aria-labelledby="tab-real" tabindex="0" hidden>
+    <div class="soon-panel">
+      <div class="soon-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 5h18v14H3z"/><path d="M7 5v14M17 5v14M3 12h18"/></svg>
+      </div>
+      <h2>Real Videos</h2>
+      <p>Nothing to show here yet. Filmed work — product, campaign and social video — is being
+         prepared for this tab.</p>
+      <a class="soon-link" href="index.html#contact">Ask us about it →</a>
+    </div>
+  </div>
+</main>
 
 <section class="tail">
   <h2>Your Brand Could<br>Be Next.</h2>
@@ -292,7 +355,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, c =>
 const flat = [];
 PROJECTS.forEach(p => p.shots.forEach(f => flat.push({ file: f, project: p.title })));
 
-document.getElementById("work").innerHTML = PROJECTS.map(p => `
+document.getElementById("panel-designs").innerHTML = PROJECTS.map(p => `
   <section class="project">
     <div class="project-head">
       <div>
@@ -363,6 +426,48 @@ lb.addEventListener("touchend", (e) => {
   if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
   x0 = null;
 }, { passive: true });
+
+/* ── tabs ──
+   The two video tabs are empty on purpose until there are samples to put in
+   them. Each tab has its own address (#designs, #ai-videos, #real-videos) so
+   a particular one can be linked to directly. */
+const TABS = [
+  { btn: "tab-designs", panel: "panel-designs", hash: "designs" },
+  { btn: "tab-ai",      panel: "panel-ai",      hash: "ai-videos" },
+  { btn: "tab-real",    panel: "panel-real",    hash: "real-videos" },
+];
+
+function selectTab(idx, { focus = false, push = true } = {}) {
+  TABS.forEach((t, i) => {
+    const btn = document.getElementById(t.btn);
+    const panel = document.getElementById(t.panel);
+    const on = i === idx;
+    btn.setAttribute("aria-selected", on ? "true" : "false");
+    btn.tabIndex = on ? 0 : -1;
+    panel.hidden = !on;
+  });
+  if (focus) document.getElementById(TABS[idx].btn).focus();
+  if (push && history.replaceState) {
+    history.replaceState(null, "", "#" + TABS[idx].hash);
+  }
+}
+
+TABS.forEach((t, i) => {
+  const btn = document.getElementById(t.btn);
+  btn.addEventListener("click", () => selectTab(i));
+  btn.addEventListener("keydown", (e) => {
+    const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (step) {
+      e.preventDefault();
+      selectTab((i + step + TABS.length) % TABS.length, { focus: true });
+    }
+    if (e.key === "Home") { e.preventDefault(); selectTab(0, { focus: true }); }
+    if (e.key === "End")  { e.preventDefault(); selectTab(TABS.length - 1, { focus: true }); }
+  });
+});
+
+const fromHash = TABS.findIndex(t => t.hash === location.hash.slice(1));
+selectTab(fromHash === -1 ? 0 : fromHash, { push: false });
 
 /* ── mobile nav ── */
 window.toggleMobileNav = function () {
