@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markadia — Designed to Make a Mark</title>
+<meta name="description" content="Markadia is a bilingual brand and content studio for Egypt, Saudi Arabia and the UAE — strategy, design, campaigns and video, in Arabic and English.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#07090f;          /* the gallery wall */
+    --paper:#efebe2;        /* the printed page */
+    --indigo:#062ff8;
+    --cyan:#8ef9fb;
+    --white:#fff;
+    --rule:rgba(255,255,255,.14);
+    --rule-dark:rgba(7,9,15,.16);
+    --display:'Barlow Condensed',sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+    --body:'Inter',sans-serif;
+    --gutter:clamp(20px,4vw,64px);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--ink);color:var(--white);font-family:var(--body);
+    overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img,video{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--indigo);color:#fff}
+
+  .skip{position:absolute;left:-9999px;top:0;background:var(--indigo);color:#fff;
+    padding:12px 18px;z-index:999}
+  .skip:focus{left:0}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+  /* type scale — one ratio, used everywhere */
+  .mega{font-family:var(--display);font-weight:900;line-height:.82;
+    letter-spacing:-.015em;text-transform:uppercase;
+    font-size:clamp(46px,11.6vw,186px)}
+  .big{font-family:var(--display);font-weight:800;line-height:.86;
+    letter-spacing:-.01em;text-transform:uppercase;
+    font-size:clamp(38px,7.5vw,104px)}
+  .it{font-family:var(--serif);font-style:italic;font-weight:400;
+    text-transform:none;letter-spacing:-.01em}
+  .outline{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
+  @supports not (-webkit-text-stroke:1px #000){ .outline{color:rgba(255,255,255,.4)} }
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(255,255,255,.42)}
+
+  /* ── nav ── */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;
+    justify-content:space-between;padding:20px var(--gutter);
+    mix-blend-mode:difference;pointer-events:none}
+  .nav > *{pointer-events:auto}
+  .wordmark{font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:.14em;
+    text-transform:uppercase}
+  .nav-links{display:flex;gap:26px;font-size:13px;font-weight:500}
+  .nav-links a{opacity:.72;transition:opacity .2s}
+  .nav-links a:hover{opacity:1}
+  @media (max-width:760px){ .nav-links{gap:16px;font-size:12px} }
+  @media (max-width:420px){ .nav-links a:nth-child(2){display:none} }
+
+  /* ── 1. hero ── */
+  .hero{min-height:100svh;padding:112px var(--gutter) 0;display:flex;flex-direction:column;
+    justify-content:space-between;position:relative;overflow:hidden}
+  .hero-type{position:relative;z-index:1;pointer-events:none}
+  .hero-type .mega{white-space:nowrap}
+  .hero-type .mega:nth-child(2){margin-left:7vw}
+  .hero-type .mega:nth-child(3){margin-left:20vw}
+  @media (max-width:900px){
+    .hero-type .mega:nth-child(2),
+    .hero-type .mega:nth-child(3){margin-left:0}
+  }
+  /* On a phone the headline is the whole composition, so let it fill the width.
+     "DESIGNED" is the longest line and sets the ceiling. */
+  @media (max-width:700px){
+    .hero-type .mega{font-size:clamp(44px,20vw,96px)}
+    .close .mega{font-size:clamp(44px,17vw,96px)}
+  }
+  .hero-type .mega{display:block}
+  .hero-sub{position:relative;z-index:3;max-width:34ch;margin-top:26px;
+    font-size:clamp(14px,1.5vw,16px);line-height:1.75;color:rgba(255,255,255,.62)}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;position:relative;z-index:3}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;
+    font-size:13px;font-weight:600;letter-spacing:.03em;transition:transform .25s,background .25s}
+  .btn-solid{background:var(--indigo);color:#fff}
+  .btn-solid:hover{transform:translateY(-2px);background:#0a3bff}
+  .btn-line{border:1px solid var(--rule);color:#fff}
+  .btn-line:hover{border-color:#fff}
+
+  /* the film plate, overlapping the type the way a print layout would */
+  .plate{position:absolute;z-index:2;right:19vw;top:50%;
+    transform:translateY(-58%);width:min(24vw,290px)}
+  .plate-media{position:relative;width:100%;aspect-ratio:9/16;border-radius:4px;
+    overflow:hidden;background:#111;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+  .plate video,.plate img{width:100%;height:100%;object-fit:cover}
+  .folio{position:absolute;right:calc(var(--gutter) - 4px);top:50%;z-index:3;
+    transform:translateY(-50%) rotate(90deg);transform-origin:right center;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(255,255,255,.3);white-space:nowrap}
+  @media (max-width:900px){ .folio{display:none} }
+  .plate-media::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(200deg,rgba(6,47,248,.18),transparent 55%)}
+  .plate-cap{margin-top:11px;white-space:nowrap;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(255,255,255,.38)}
+
+  /* index strip across the foot of the hero */
+  .strip{position:relative;z-index:3;border-top:1px solid var(--rule);
+    margin-top:40px;padding:14px 0 18px;display:flex;justify-content:space-between;
+    gap:20px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.4);flex-wrap:wrap}
+  .strip b{font-weight:600;color:rgba(255,255,255,.78)}
+
+  @media (max-width:900px){
+    .plate{position:relative;right:auto;top:auto;transform:none;width:100%;
+      max-width:320px;margin:30px 0 8px}
+    .plate-media{aspect-ratio:16/11}
+    .hero{justify-content:flex-start;padding-top:96px}
+    .hero-type{max-width:none}
+  }
+
+  /* ── 2. manifesto, printed on paper ── */
+  .paper{background:var(--paper);color:var(--ink);padding:clamp(80px,13vw,180px) var(--gutter)}
+  .paper ::selection{background:var(--ink);color:var(--paper)}
+  .paper .eyebrow{color:rgba(7,9,15,.5)}
+  .manifesto{max-width:1180px;margin:0 auto}
+  .manifesto .big{max-width:17ch}
+  .manifesto .outline{-webkit-text-stroke:1.5px rgba(7,9,15,.6);color:transparent}
+  @supports not (-webkit-text-stroke:1px #000){ .manifesto .outline{color:rgba(7,9,15,.45)} }
+  .manifesto .it{color:var(--indigo)}
+  .m-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);
+    margin-top:clamp(40px,6vw,72px);padding-top:30px;border-top:1px solid var(--rule-dark)}
+  .m-grid p{font-size:clamp(14px,1.45vw,16.5px);line-height:1.85;color:rgba(7,9,15,.72)}
+  .m-num{font-family:var(--display);font-weight:800;font-size:clamp(40px,5vw,66px);
+    line-height:1;letter-spacing:-.02em}
+  .m-stats{display:flex;gap:clamp(26px,5vw,70px);flex-wrap:wrap;margin-top:34px}
+  .m-stats span{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(7,9,15,.5);margin-top:6px}
+  @media (max-width:760px){ .m-grid{grid-template-columns:1fr} }
+
+  /* ── 3. the disciplines, stacked over footage ── */
+  .stack{position:relative;overflow:hidden;background:#05070c}
+  .stack-bg{position:absolute;inset:0}
+  .stack-bg video,.stack-bg img{width:100%;height:100%;object-fit:cover;opacity:.3}
+  .stack-bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,#05070c,rgba(5,7,12,.3) 22%,rgba(5,7,12,.3) 78%,#05070c)}
+  .stack-inner{position:relative;z-index:2;padding:clamp(80px,12vw,150px) var(--gutter)}
+  .stack-list{list-style:none;max-width:1180px;margin:26px auto 0}
+  .stack-list li{border-top:1px solid var(--rule);padding:clamp(10px,1.4vw,18px) 0;
+    display:flex;align-items:baseline;gap:clamp(12px,2.5vw,32px)}
+  .stack-list li:last-child{border-bottom:1px solid var(--rule)}
+  .stack-list .n{font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.3);
+    min-width:2.4ch;flex-shrink:0}
+  .stack-list .big{transition:color .3s,opacity .3s}
+  .stack-list li:hover .big{color:var(--cyan)}
+  .stack-list .tail{margin-left:auto;font-size:12px;color:rgba(255,255,255,.4);
+    text-align:right;max-width:30ch;white-space:nowrap}
+  @media (max-width:700px){ .stack-list .tail{display:none} }
+
+  /* ── 4. work index, paper again, image follows the cursor ── */
+  .index-head{display:flex;align-items:baseline;justify-content:space-between;
+    gap:20px;flex-wrap:wrap;max-width:1180px;margin:0 auto 10px}
+  .index{list-style:none;max-width:1180px;margin:0 auto;position:relative}
+  .index li{border-top:1px solid var(--rule-dark)}
+  .index li:last-child{border-bottom:1px solid var(--rule-dark)}
+  .index a{display:flex;align-items:baseline;gap:clamp(12px,3vw,40px);
+    padding:clamp(14px,2vw,26px) 0;transition:padding-left .35s,color .3s}
+  .index a:hover{padding-left:clamp(8px,1.5vw,22px);color:var(--indigo)}
+  .index .big{font-size:clamp(30px,5.4vw,78px)}
+  .index .meta{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(7,9,15,.45);text-align:right;flex-shrink:0}
+  .follower{position:fixed;top:0;left:0;width:230px;aspect-ratio:4/5;border-radius:3px;
+    overflow:hidden;pointer-events:none;opacity:0;z-index:70;
+    transform:translate(-50%,-50%) scale(.94);
+    transition:opacity .3s,transform .3s;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+  .follower.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .follower img{width:100%;height:100%;object-fit:cover}
+  @media (max-width:900px){ .follower{display:none} }
+
+  /* ── 5. close ── */
+  .close{padding:clamp(90px,14vw,190px) var(--gutter);text-align:center;position:relative;
+    overflow:hidden}
+  .close::before{content:"";position:absolute;left:50%;top:50%;width:min(120vw,1100px);
+    aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(6,47,248,.26),transparent 62%);pointer-events:none}
+  .close > *{position:relative;z-index:2}
+  .close .mega{font-size:clamp(46px,10vw,150px)}
+  .close p{max-width:38ch;margin:24px auto 30px;color:rgba(255,255,255,.6);line-height:1.8;
+    font-size:clamp(14px,1.5vw,16px)}
+
+  footer{border-top:1px solid var(--rule);padding:30px var(--gutter);
+    display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    font-size:12px;color:rgba(255,255,255,.42)}
+  footer a:hover{color:#fff}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+
+  /* ── marquee ── */
+  .marquee{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    padding:16px 0;background:var(--ink)}
+  .marquee-track{display:flex;gap:46px;width:max-content;animation:slide 42s linear infinite}
+  .marquee span{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.6vw,34px);
+    text-transform:uppercase;letter-spacing:.02em;color:rgba(255,255,255,.26);
+    display:flex;align-items:center;gap:46px;white-space:nowrap}
+  .marquee span::after{content:"◆";font-size:9px;color:var(--indigo)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* reveal on scroll */
+  .js .r{opacity:0;transform:translateY(26px);
+    transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
+  .js .r.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+      transition-duration:.01ms!important;scroll-behavior:auto!important}
+    .r{opacity:1;transform:none}
+    .marquee-track{animation:none}
+  }
+</style>
+<script>document.documentElement.className="js"</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav">
+  <a class="wordmark" href="#main" aria-label="Markadia, home">Markadia</a>
+  <div class="nav-links">
+    <a href="portfolio.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ── 1 ─────────────────────────────────────────────── -->
+<header class="hero">
+  <div>
+    <h1 class="hero-type">
+      <span class="mega">Designed</span>
+      <span class="mega">To Make</span>
+      <span class="mega outline">A Mark.</span>
+    </h1>
+    <p class="hero-sub">A bilingual brand and content studio working across Egypt,
+      Saudi Arabia and the UAE — strategy, design, campaigns and video, in Arabic
+      and English.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="contact.html">Book a free consultation →</a>
+      <a class="btn btn-line" href="portfolio.html">See the work</a>
+    </div>
+  </div>
+
+  <figure class="plate" aria-hidden="true">
+    <div class="plate-media">
+      <video id="heroClip" muted loop playsinline preload="none"
+             poster="assets/video/ai/v60-pour-poster.jpg"></video>
+    </div>
+    <figcaption class="plate-cap">Fig. 01 — AI ad video, F&amp;B</figcaption>
+  </figure>
+
+  <div class="folio" aria-hidden="true">Markadia — Brand &amp; Content Studio</div>
+
+  <div class="strip">
+    <div><b>Cairo</b> · Riyadh · Dubai</div>
+    <div>Branding · Content · Campaigns · <b>Video</b></div>
+    <div>Est. <b>2025</b></div>
+  </div>
+</header>
+
+<!-- ── 2 ─────────────────────────────────────────────── -->
+<section class="paper">
+  <div class="manifesto">
+    <h2 class="eyebrow r">The studio</h2>
+    <p class="big r" style="margin-top:18px">
+      We don't fill<br>feeds. We build<br><span class="it">things worth</span><br>
+      <span class="outline">remembering.</span>
+    </p>
+
+    <div class="m-grid">
+      <div class="r">
+        <div class="eyebrow">What that means</div>
+        <p style="margin-top:14px">Every piece starts with a reason to exist — a thing
+          to say, to someone specific, in a language that fits them. Arabic and English
+          are written for their own market here, not translated into it.</p>
+      </div>
+      <div class="r">
+        <div class="eyebrow">How we work</div>
+        <p style="margin-top:14px">Direction before production. You see the strategy,
+          the tone and the visual approach before anything is made. Then it gets built —
+          design, copy, campaign and video, under one roof.</p>
+      </div>
+    </div>
+
+    <div class="m-stats r">
+      <div><div class="m-num">43</div><span>Pieces published</span></div>
+      <div><div class="m-num">9</div><span>Services</span></div>
+      <div><div class="m-num">3</div><span>Markets</span></div>
+      <div><div class="m-num">2</div><span>Languages</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3 ─────────────────────────────────────────────── -->
+<section class="stack">
+  <div class="stack-bg" aria-hidden="true">
+    <video id="stackClip" muted loop playsinline preload="none"
+           poster="assets/video/ai/storefront-night-poster.jpg"></video>
+  </div>
+  <div class="stack-inner">
+    <div style="max-width:1180px;margin:0 auto">
+      <h2 class="eyebrow r">What we make</h2>
+    </div>
+    <ul class="stack-list">
+      <li class="r"><span class="n">01</span><span class="big">Branding</span>
+        <span class="tail">Identity, palette, type, templates</span></li>
+      <li class="r"><span class="n">02</span><span class="big">Content</span>
+        <span class="tail">Calendars, design, copy, publishing</span></li>
+      <li class="r"><span class="n">03</span><span class="big">Campaigns</span>
+        <span class="tail">Meta, TikTok and Google, end to end</span></li>
+      <li class="r"><span class="n">04</span><span class="big it">Video</span>
+        <span class="tail">AI spots now, filmed work next</span></li>
+      <li class="r"><span class="n">05</span><span class="big">Web</span>
+        <span class="tail">Sites and landing pages that convert</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Strategy</span><span>Art Direction</span><span>Copywriting</span><span>Motion</span>
+    <span>Paid Social</span><span>Identity</span>
+    <span>Strategy</span><span>Art Direction</span><span>Copywriting</span><span>Motion</span>
+    <span>Paid Social</span><span>Identity</span>
+  </div>
+</div>
+
+<!-- ── 4 ─────────────────────────────────────────────── -->
+<section class="paper">
+  <div class="index-head">
+    <h2 class="eyebrow r">Selected work</h2>
+    <a class="eyebrow r" href="portfolio.html" style="color:var(--indigo)">All work →</a>
+  </div>
+  <ul class="index" id="index">
+    <li class="r"><a href="portfolio.html#design" data-img="assets/portfolio/smash-burger-01-thumb.jpg">
+      <span class="big">Smash Burger</span><span class="meta">Food &amp; Beverage · 9</span></a></li>
+    <li class="r"><a href="portfolio.html#design" data-img="assets/portfolio/sama-school-01-thumb.jpg">
+      <span class="big">Sama School</span><span class="meta">Education · 9</span></a></li>
+    <li class="r"><a href="portfolio.html#design" data-img="assets/portfolio/glowy-01-thumb.jpg">
+      <span class="big">Glowy</span><span class="meta">Beauty · 9</span></a></li>
+    <li class="r"><a href="portfolio.html#ai-video" data-img="assets/video/ai/smoothie-ice-poster.jpg">
+      <span class="big it">AI Ad Video</span><span class="meta">16 clips</span></a></li>
+  </ul>
+</section>
+
+<figure class="follower" id="follower" aria-hidden="true"><img src="" alt=""></figure>
+
+<!-- ── 5 ─────────────────────────────────────────────── -->
+<section class="close">
+  <h2 class="mega">Make<br><span class="it" style="text-transform:none">your</span> mark.</h2>
+  <p>Tell us where the brand is and where it should be. You'll get a direction
+     before you get an invoice.</p>
+  <a class="btn btn-solid" href="contact.html">Start the conversation →</a>
+</section>
+
+</main>
+
+<footer>
+  <div>© <span id="yr">2026</span> Markadia — Designed to Make a Mark.</div>
+  <div class="foot-links">
+    <a href="mailto:info@markadiawave.com">info@markadiawave.com</a>
+    <a href="https://www.instagram.com/Markadiaagency" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/markadiaagency" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+/* Reveal on scroll. */
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+}, { threshold: .12, rootMargin: "0px 0px -8%" });
+document.querySelectorAll(".r").forEach((el, i) => {
+  el.style.transitionDelay = (i % 5) * 60 + "ms";
+  io.observe(el);
+});
+
+/* Footage: nothing is fetched until the section is near, and it stops when it
+   leaves — two clips should not cost a visitor two downloads they never see. */
+function lazyClip(id, src) {
+  const v = document.getElementById(id);
+  if (!v || reduce) return;                 /* reduced motion keeps the poster */
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        if (!v.src) { v.src = src; v.load(); }
+        v.play().catch(() => {});
+      } else { v.pause(); }
+    });
+  }, { rootMargin: "200px" });
+  obs.observe(v);
+}
+lazyClip("heroClip",  "assets/video/ai/v60-pour.mp4");
+lazyClip("stackClip", "assets/video/ai/storefront-night.mp4");
+
+/* The index image rides the cursor — a pointer-only flourish. */
+const follower = document.getElementById("follower");
+const fImg = follower.querySelector("img");
+const index = document.getElementById("index");
+if (index && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  let raf = null, tx = 0, ty = 0;
+  const draw = () => { follower.style.translate = tx + "px " + ty + "px"; raf = null; };
+
+  index.addEventListener("pointermove", (e) => {
+    tx = e.clientX; ty = e.clientY;
+    if (!raf) raf = requestAnimationFrame(draw);
+  });
+  index.addEventListener("pointerover", (e) => {
+    const a = e.target.closest("a[data-img]");
+    if (!a) return;
+    fImg.src = a.dataset.img;
+    follower.classList.add("on");
+  });
+  index.addEventListener("pointerleave", () => follower.classList.remove("on"));
+}
+})();
+</script>
+</body>
+</html>
