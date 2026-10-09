@@ -6,14 +6,14 @@
 <title>Page Not Found — Markadia</title>
 <meta name="robots" content="noindex, follow">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/icon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <meta name="theme-color" content="#062FF8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--indigo:#062ff8;--cyan:#8ef9fb;--navy:#060b1a;--off-white:#dce0f0;}
+  :root{--indigo:#062ff8;--cyan:#96f9fb;--navy:#060b1a;--off-white:#dce0f0;}
   *{margin:0;padding:0;box-sizing:border-box;}
   html{overflow-x:hidden;}
   body{min-height:100vh;background:var(--navy);color:#fff;font-family:'Inter',system-ui,sans-serif;
@@ -24,12 +24,12 @@
        background:radial-gradient(circle,rgba(6,47,248,.38) 0%,rgba(6,47,248,.08) 45%,rgba(6,47,248,0) 70%);}
   body::after{content:'';position:fixed;width:700px;height:700px;max-width:140vw;max-height:140vw;
        right:-260px;bottom:-380px;border-radius:50%;pointer-events:none;
-       background:radial-gradient(circle,rgba(142,249,251,.14) 0%,rgba(142,249,251,0) 68%);}
+       background:radial-gradient(circle,rgba(150,249,251,.14) 0%,rgba(150,249,251,0) 68%);}
   .card{position:relative;z-index:1;max-width:620px;width:100%;text-align:center;}
-  .mark{width:54px;height:54px;margin:0 auto 28px;display:block;}
+  .mark{height:34px;width:auto;margin:0 auto 28px;display:block;}
   .code{font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-weight:900;font-size:clamp(88px,20vw,168px);
         line-height:.86;letter-spacing:-.02em;color:var(--cyan);
-        text-shadow:0 0 46px rgba(142,249,251,.28);}
+        text-shadow:0 0 46px rgba(150,249,251,.28);}
   h1{font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-weight:800;text-transform:uppercase;
      font-size:clamp(26px,6vw,40px);letter-spacing:.01em;margin-top:14px;}
   p{color:rgba(255,255,255,.58);font-size:clamp(15px,3.4vw,17px);line-height:1.6;
@@ -49,14 +49,10 @@
 </head>
 <body>
   <main class="card">
-    <svg class="mark" viewBox="0 0 32 32" role="img" aria-label="Markadia">
-      <defs>
-        <clipPath id="o"><polygon points="0,0 32,0 32,22.4 22.4,32 0,32"/></clipPath>
-        <clipPath id="i"><polygon points="4,4 28,4 28,19.5 19.5,28 4,28"/></clipPath>
-      </defs>
-      <rect width="32" height="32" fill="#062ff8" clip-path="url(#o)"/>
-      <rect width="32" height="32" fill="#060b1a" clip-path="url(#i)"/>
-    </svg>
+    <a href="index.html" aria-label="Markadia, home">
+      <img class="mark" src="assets/brand/logo-dark-nav.png" width="1120" height="162"
+           alt="Markadia — Designed to Make a Mark.">
+    </a>
     <div class="code">404</div>
     <h1>This page didn't make its mark</h1>
     <p>The page you're looking for has moved or never existed. Let's get you back to something that works.</p>

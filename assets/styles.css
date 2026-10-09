@@ -7,8 +7,8 @@
     --indigo: #062ff8;
     --indigo-dim: #0a28cc;
     --indigo-glow: rgba(6,47,248,0.35);
-    --cyan: #8ef9fb;
-    --cyan-dim: rgba(142,249,251,0.12);
+    --cyan: #96f9fb;
+    --cyan-dim: rgba(150,249,251,0.12);
     --white: #ffffff;
     --off-white: #dce0f0;
     --navy: #0e1221;
@@ -237,6 +237,13 @@
 
   /* The mark, matching assets/brand/mark.svg and the favicon: a frame, not a
      solid square. It was drawn solid here and framed everywhere else. */
+  /* The supplied lockup, used at a fixed height so the artwork is never
+     stretched — brand guidelines forbid distorting it. */
+  .brand-logo { height: 30px; width: auto; display: block; }
+  .brand-logo-sm { height: 22px; }
+  .brand-logo-loader { height: 42px; margin: 0 auto; }
+  @media (max-width: 640px) { .brand-logo { height: 24px; } }
+
   .nav-icon {
     width: 32px;
     height: 32px;
@@ -320,7 +327,7 @@
     inset: 0;
     background:
       radial-gradient(ellipse 70% 60% at 80% 50%, rgba(6,47,248,0.22) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(142,249,251,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(150,249,251,0.06) 0%, transparent 55%),
       linear-gradient(160deg, #000 0%, #0a0c1a 50%, #000 100%);
   }
 
@@ -358,7 +365,7 @@
 
   .orb-2 {
     width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(142,249,251,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(150,249,251,0.08) 0%, transparent 70%);
     bottom: 10%; right: 30%;
     animation-duration: 7s;
     animation-delay: -3s;
@@ -750,7 +757,7 @@
     position: absolute;
     inset: -1px;
     border-radius: 11px;
-    background: linear-gradient(135deg, rgba(6,47,248,0.4), transparent 50%, rgba(142,249,251,0.15));
+    background: linear-gradient(135deg, rgba(6,47,248,0.4), transparent 50%, rgba(150,249,251,0.15));
     opacity: 0;
     transition: opacity 0.3s;
     z-index: -1;
@@ -891,7 +898,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1.1;
-    background: linear-gradient(135deg, #fff 60%, rgba(142,249,251,0.7));
+    background: linear-gradient(135deg, #fff 60%, rgba(150,249,251,0.7));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -911,7 +918,7 @@
     height: 3px;
     width: 0%;
     background: linear-gradient(90deg, var(--indigo), var(--cyan));
-    box-shadow: 0 0 12px rgba(6,47,248,0.8), 0 0 4px rgba(142,249,251,0.4);
+    box-shadow: 0 0 12px rgba(6,47,248,0.8), 0 0 4px rgba(150,249,251,0.4);
     transition: width 0.08s linear;
     z-index: 10;
   }
@@ -1587,7 +1594,7 @@
     position: absolute;
     bottom: -20px; right: -24px;
     background: rgba(6,47,248,0.95);
-    border: 1px solid rgba(142,249,251,0.2);
+    border: 1px solid rgba(150,249,251,0.2);
     border-radius: 12px;
     padding: 10px 16px;
     display: flex; align-items: center; gap: 10px;
@@ -1971,7 +1978,7 @@
     position: absolute;
     inset: -1px;
     border-radius: 13px;
-    background: linear-gradient(135deg, #062ff8, #8ef9fb, #062ff8, #8ef9fb);
+    background: linear-gradient(135deg, #062ff8, #96f9fb, #062ff8, #96f9fb);
     background-size: 300% 300%;
     animation: grad-border 4s linear infinite;
     z-index: -1;
@@ -2211,7 +2218,7 @@
   /* ══════════════════════════════════════
      MARKETING IN MOTION SECTION
   ══════════════════════════════════════ */
-  :root { --im-indigo: #062ff8; --im-cyan: #8ef9fb; }
+  :root { --im-indigo: #062ff8; --im-cyan: #96f9fb; }
 
   #inmotion {
     background: var(--navy);
@@ -2341,7 +2348,7 @@
     position: absolute;
     top: 0; left: -100%; bottom: 0;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(6,47,248,0.5), rgba(142,249,251,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(6,47,248,0.5), rgba(150,249,251,0.3), transparent);
     animation: im-type-sweep 2.5s ease-in-out infinite;
   }
 
@@ -2658,7 +2665,7 @@
   select:focus-visible,
   textarea:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--cyan, #8ef9fb);
+    outline: 2px solid var(--cyan, #96f9fb);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -2696,7 +2703,7 @@
     font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
     font-weight: 700; font-size: 19px; text-transform: uppercase; letter-spacing: 0.08em;
     color: var(--cyan); text-decoration: none;
-    border-bottom: 1px solid rgba(142,249,251,0.4); padding-bottom: 4px;
+    border-bottom: 1px solid rgba(150,249,251,0.4); padding-bottom: 4px;
   }
   .teaser-link:hover { color: #fff; border-bottom-color: #fff; }
   @media (max-width: 820px) {
@@ -2715,9 +2722,9 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: rgba(142,249,251,0.13);
-    color: #8EF9FB;
-    -webkit-text-fill-color: #8EF9FB;
+    background: rgba(150,249,251,0.13);
+    color: #96f9fb;
+    -webkit-text-fill-color: #96f9fb;
     padding: 3px 9px;
     border-radius: 99px;
   }

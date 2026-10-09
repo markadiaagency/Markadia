@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://markadiawave.com/portfolio.html">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/icon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <meta name="theme-color" content="#062FF8">
 <meta property="og:title" content="Our Work: Brand &amp; Campaign Design — Markadia">
@@ -27,7 +27,7 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet"></noscript>
 <style>
   :root{
-    --indigo:#062ff8; --indigo-dim:#0a28cc; --cyan:#8ef9fb;
+    --indigo:#062ff8; --indigo-dim:#0a28cc; --cyan:#96f9fb;
     --navy:#060b1a; --mid:#0e1221; --card:#151929;
     --off-white:#dce0f0; --muted:rgba(255,255,255,0.45);
     --border:rgba(255,255,255,0.07);
@@ -53,6 +53,11 @@
   .nav-brand{display:flex;align-items:center;gap:10px}
   /* same geometry as assets/brand/mark.svg; the counter is cut out rather than
      painted over, so the mark no longer depends on the colour behind it */
+  /* supplied lockup at a fixed height — never stretched */
+  .brand-logo{height:28px;width:auto;display:block}
+  .brand-logo-sm{height:20px}
+  @media (max-width:640px){.brand-logo{height:23px}}
+
   .nav-icon{width:26px;height:26px;background:var(--indigo);flex-shrink:0;
     clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%,0 0,
       12.5% 12.5%,12.5% 87.5%,65% 87.5%,87.5% 65%,87.5% 12.5%,12.5% 12.5%)}
@@ -100,7 +105,7 @@
   .tab:hover{color:#fff}
   .tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--indigo)}
   .tab .soon{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;background:rgba(142,249,251,.13);color:var(--cyan);
+    text-transform:uppercase;background:rgba(150,249,251,.13);color:var(--cyan);
     padding:3px 9px;border-radius:99px}
   .panel[hidden]{display:none!important}
   .soon-panel{text-align:center;padding:96px 20px 110px;max-width:60ch;margin:0 auto}
@@ -110,11 +115,11 @@
   .soon-panel h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,6vw,48px);
     text-transform:uppercase;line-height:1}
   .soon-panel p{color:rgba(255,255,255,.55);margin:14px 0 26px}
-  .soon-panel p a{color:var(--cyan);border-bottom:1px solid rgba(142,249,251,.4)}
+  .soon-panel p a{color:var(--cyan);border-bottom:1px solid rgba(150,249,251,.4)}
   .soon-panel p a:hover{color:#fff;border-bottom-color:#fff}
   .soon-link{display:inline-block;font-family:var(--display);font-weight:700;font-size:17px;
     text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);
-    border-bottom:1px solid rgba(142,249,251,.4);padding-bottom:3px}
+    border-bottom:1px solid rgba(150,249,251,.4);padding-bottom:3px}
   .soon-link:hover{color:#fff;border-bottom-color:#fff}
 
   /* ── projects ── */
@@ -243,8 +248,7 @@
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <div class="nav-icon"></div>
-    <span class="nav-wordmark">Markadia</span>
+    <img src="assets/brand/logo-dark-nav.png" alt="Markadia — Designed to Make a Mark." width="1120" height="162" class="brand-logo">
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -313,8 +317,7 @@
 
 <footer>
   <a class="nav-brand" href="index.html" style="gap:8px">
-    <div class="nav-icon" style="width:20px;height:20px"></div>
-    <span class="nav-wordmark" style="font-size:17px">Markadia</span>
+    <img src="assets/brand/logo-dark.png" alt="Markadia — Designed to Make a Mark." width="1120" height="247" class="brand-logo brand-logo-sm">
   </a>
   <div class="socials">
     <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" aria-label="Facebook">
