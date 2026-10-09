@@ -7,7 +7,10 @@
 <meta name="description" content="Selected work by Markadia — campaign and social design plus AI-generated ad video, in Arabic and English, for brands across Egypt and the Gulf.">
 <link rel="canonical" href="https://markadiawave.com/portfolio.html">
 <meta name="robots" content="index, follow">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0ib3V0ZXIiPgogICAgICA8cG9seWdvbiBwb2ludHM9IjAsMCAzMiwwIDMyLDIyLjQgMjIuNCwzMiAwLDMyIi8+CiAgICA8L2NsaXBQYXRoPgogICAgPGNsaXBQYXRoIGlkPSJpbm5lciI+CiAgICAgIDxwb2x5Z29uIHBvaW50cz0iNCw0IDI4LDQgMjgsMTkuNSAxOS41LDI4IDQsMjgiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDwhLS0gT3V0ZXIgaW5kaWdvIHNoYXBlIC0tPgogIDxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzA2MmZmOCIgY2xpcC1wYXRoPSJ1cmwoI291dGVyKSIvPgogIDwhLS0gSW5uZXIgZGFyayBjdXRvdXQgLS0+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDYwYjFhIiBjbGlwLXBhdGg9InVybCgjaW5uZXIpIi8+Cjwvc3ZnPg==">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#062FF8">
 <meta property="og:title" content="Our Work: Brand &amp; Campaign Design — Markadia">
 <meta property="og:description" content="Campaign design and AI ad video for brands across Egypt and the Gulf.">
 <meta property="og:type" content="website">
@@ -48,10 +51,11 @@
       justify-content:space-between;padding:20px 60px;background:rgba(6,11,26,.88);
       backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
   .nav-brand{display:flex;align-items:center;gap:10px}
+  /* same geometry as assets/brand/mark.svg; the counter is cut out rather than
+     painted over, so the mark no longer depends on the colour behind it */
   .nav-icon{width:26px;height:26px;background:var(--indigo);flex-shrink:0;
-    clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);position:relative}
-  .nav-icon::after{content:'';position:absolute;inset:4px 4px 4px 4px;background:var(--navy);
-    clip-path:polygon(0 0,100% 0,100% 64%,64% 100%,0 100%)}
+    clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%,0 0,
+      12.5% 12.5%,12.5% 87.5%,65% 87.5%,87.5% 65%,87.5% 12.5%,12.5% 12.5%)}
   .nav-wordmark{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.16em;
     text-transform:uppercase}
   .nav-links{display:flex;gap:30px;list-style:none;align-items:center}

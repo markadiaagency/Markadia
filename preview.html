@@ -6,6 +6,10 @@
 <title>Markadia — Designed to Make a Mark</title>
 <meta name="description" content="Markadia is a bilingual brand and content studio for Egypt, Saudi Arabia and the UAE — strategy, design, campaigns and video, in Arabic and English.">
 <meta name="robots" content="noindex">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#062FF8">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +20,10 @@
     --ink:#000;
     --off:#07090f;
     --paper:#efebe2;
-    --indigo:#062ff8;
-    --cyan:#8ef9fb;
+    --indigo:#062FF8;        /* brand primary */
+    --indigo-deep:#041FA8;
+    --cyan:#8EF9FB;          /* brand accent */
+    --indigo-wash:rgba(6,47,248,.13);
     --rule:rgba(255,255,255,.13);
     --rule-dark:rgba(7,9,15,.16);
     --display:'Barlow Condensed',sans-serif;
@@ -32,6 +38,10 @@
   img,video{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--indigo);color:#fff}
+  .progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:200;
+    transform:scaleX(0);transform-origin:0 50%;
+    background:linear-gradient(90deg,var(--indigo),var(--cyan));will-change:transform}
+
   .skip{position:absolute;left:-9999px;top:0;background:var(--indigo);color:#fff;
     padding:12px 18px;z-index:9999}
   .skip:focus{left:0}
@@ -43,6 +53,14 @@
     letter-spacing:-.01em}
   .eyebrow{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
     color:rgba(255,255,255,.4)}
+  /* each section is numbered, and the rule carries the brand colour */
+  .idx{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .idx::after{content:"";height:1px;flex:1;
+    background:linear-gradient(90deg,var(--indigo),transparent)}
+  .idx .no{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.1em;
+    color:var(--cyan)}
+  .paper .idx .no{color:var(--indigo)}
+  .paper .idx::after{background:linear-gradient(90deg,var(--indigo),transparent);opacity:.5}
 
   /* ── custom cursor ───────────────────────────────── */
   .cursor{position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;
@@ -54,8 +72,10 @@
   /* ── nav ─────────────────────────────────────────── */
   .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
     justify-content:space-between;padding:20px var(--g);mix-blend-mode:difference}
-  .mark{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:.16em;
-    text-transform:uppercase}
+  .mark{display:flex;align-items:center;gap:10px;font-family:var(--display);
+    font-weight:900;font-size:18px;letter-spacing:.16em;text-transform:uppercase}
+  .mark svg{width:21px;height:21px;flex-shrink:0}
+  .mark svg path{fill:#fff}        /* the nav blends, so the mark reads as one piece */
   .nav ul{display:flex;gap:24px;list-style:none;font-size:12.5px;font-weight:500}
   .nav a{opacity:.7;transition:opacity .25s}
   .nav a:hover{opacity:1}
@@ -197,7 +217,30 @@
     white-space:nowrap}
   @media (max-width:720px){ .disc .d{display:none} }
 
-  /* ── 05 · close ───────────────────────────────────── */
+  /* ── 05 · the mark ────────────────────────────────── */
+  .ident{background:var(--ink);padding:clamp(80px,12vw,160px) var(--g);
+    border-top:1px solid var(--rule)}
+  .ident-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);
+    gap:clamp(32px,6vw,90px);align-items:center;margin-top:34px}
+  .ident-mark svg{width:100%;height:auto;max-width:300px}
+  .ident-mark svg path{fill:var(--indigo)}
+  .ident-line{font-family:var(--display);font-weight:900;text-transform:uppercase;
+    line-height:.84;letter-spacing:-.02em;font-size:clamp(34px,6vw,86px)}
+  .ident-line span{display:block;white-space:nowrap}
+  .ident-note{margin-top:20px;max-width:46ch;line-height:1.8;font-size:15px;
+    color:rgba(255,255,255,.55)}
+  .swatches{list-style:none;display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .swatches li{display:flex;align-items:center;gap:9px;padding:8px 14px 8px 8px;
+    border:1px solid var(--rule);border-radius:100px;font-size:11px;letter-spacing:.08em}
+  .swatches i{width:17px;height:17px;border-radius:50%;flex-shrink:0}
+  .swatches b{font-weight:600}
+  .swatches span{color:rgba(255,255,255,.4);font-variant-numeric:tabular-nums}
+  @media (max-width:760px){
+    .ident-grid{grid-template-columns:1fr;gap:28px}
+    .ident-mark svg{max-width:120px}
+  }
+
+  /* ── 06 · close ───────────────────────────────────── */
   .close{position:relative;padding:clamp(100px,15vw,200px) var(--g);text-align:center;
     overflow:hidden;background:var(--ink)}
   .close::before{content:"";position:absolute;left:50%;top:50%;width:min(130vw,1200px);
@@ -234,10 +277,14 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <nav class="nav">
-  <a class="mark" href="#main" aria-label="Markadia, home">Markadia</a>
+  <a class="mark" href="#main" aria-label="Markadia, home">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path fill-rule="evenodd" d="M0 0h64v44.8L44.8 64H0Z M8 8v48h33.7L56 41.7V8Z"/></svg>
+    <span>Markadia</span>
+  </a>
   <ul>
     <li><a href="portfolio.html">Work</a></li>
     <li><a href="services.html">Services</a></li>
@@ -280,6 +327,7 @@
 <!-- 02 ───────────────────────────────────────────────── -->
 <section class="paper">
   <div class="wrap">
+    <div class="idx"><span class="no">01</span></div>
     <h2 class="eyebrow">The studio</h2>
     <p class="statement" data-split>We don't fill feeds. We build <em class="it">things worth</em> remembering.</p>
     <div class="cols">
@@ -297,10 +345,10 @@
       </div>
     </div>
     <div class="figs">
-      <div class="fig"><b>43</b><span>Pieces published</span></div>
-      <div class="fig"><b>9</b><span>Services</span></div>
-      <div class="fig"><b>3</b><span>Markets</span></div>
-      <div class="fig"><b>2</b><span>Languages</span></div>
+      <div class="fig"><b data-count="43">43</b><span>Pieces published</span></div>
+      <div class="fig"><b data-count="9">9</b><span>Services</span></div>
+      <div class="fig"><b data-count="3">3</b><span>Markets</span></div>
+      <div class="fig"><b data-count="2">2</b><span>Languages</span></div>
     </div>
   </div>
 </section>
@@ -309,7 +357,8 @@
 <section class="rail" id="rail">
   <div class="rail-pin">
     <div class="rail-head">
-      <h2 class="eyebrow">Selected work</h2>
+      <div><div class="idx"><span class="no">02</span></div>
+      <h2 class="eyebrow">Selected work</h2></div>
       <a class="eyebrow" href="portfolio.html" style="color:var(--cyan)">All work →</a>
     </div>
     <div class="rail-track" id="railTrack"></div>
@@ -319,7 +368,10 @@
 
 <!-- 04 ───────────────────────────────────────────────── -->
 <section class="disc">
-  <div style="max-width:1180px;margin:0 auto"><h2 class="eyebrow">What we make</h2></div>
+  <div style="max-width:1180px;margin:0 auto">
+    <div class="idx"><span class="no">03</span></div>
+    <h2 class="eyebrow">What we make</h2>
+  </div>
   <ol>
     <li><a class="row" href="services.html"><span class="n">01</span>
       <span class="t">Branding</span><span class="d">Identity, palette, type, templates</span></a></li>
@@ -335,6 +387,31 @@
 </section>
 
 <!-- 05 ───────────────────────────────────────────────── -->
+<section class="ident">
+  <div class="wrap">
+    <div class="idx"><span class="no">04</span></div>
+    <h2 class="eyebrow">The mark</h2>
+    <div class="ident-grid">
+      <div class="ident-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><path fill-rule="evenodd" d="M0 0h64v44.8L44.8 64H0Z M8 8v48h33.7L56 41.7V8Z"/></svg>
+      </div>
+      <div class="ident-say">
+        <p class="ident-line" data-fit-group><span data-fit>Designed to</span><span data-fit>make a mark.</span></p>
+        <p class="ident-note">Barlow Condensed for the headlines, Inter for reading,
+          Instrument Serif for the word that needs to be said differently. Indigo
+          carries the brand; cyan marks what is live.</p>
+        <ul class="swatches">
+          <li><i style="background:#062FF8"></i><b>Indigo</b><span>#062FF8</span></li>
+          <li><i style="background:#8EF9FB"></i><b>Cyan</b><span>#8EF9FB</span></li>
+          <li><i style="background:#EFEBE2"></i><b>Paper</b><span>#EFEBE2</span></li>
+          <li><i style="background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)"></i><b>Ink</b><span>#000000</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ───────────────────────────────────────────────── -->
 <section class="close">
   <h2>Make<br><em class="it" style="text-transform:none">your</em> mark.</h2>
   <p>Tell us where the brand is and where it should be. You'll get a direction
@@ -481,6 +558,39 @@ document.querySelectorAll("[data-split]").forEach((el) => {
   /* These words start at zero opacity, so nothing may leave them there. If the
      observer has not fired by now, show them and drop the effect. */
   const failsafe = setTimeout(() => { show(false); obs.disconnect(); }, 4000);
+});
+
+/* ── scroll progress ─────────────────────────────────── */
+const prog = document.getElementById("progress");
+if (prog) {
+  const draw = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = "scaleX(" + (max > 0 ? Math.min(1, scrollY / max) : 0) + ")";
+  };
+  addEventListener("scroll", draw, { passive: true });
+  addEventListener("resize", draw);
+  draw();
+}
+
+/* ── figures count up once, when they arrive ─────────────── */
+document.querySelectorAll("[data-count]").forEach((el) => {
+  const target = Number(el.dataset.count);
+  if (!Number.isFinite(target)) return;
+  if (reduce) { el.textContent = target; return; }
+  el.textContent = "0";
+  new IntersectionObserver((es, o) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    o.disconnect();
+    const t0 = performance.now(), ms = 1100;
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / ms);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { threshold: .6 }).observe(el);
+  /* never leave a zero on screen if the observer never fires */
+  setTimeout(() => { if (el.textContent === "0") el.textContent = target; }, 4000);
 });
 
 /* ── the work rail ───────────────────────────────────────

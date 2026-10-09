@@ -235,11 +235,15 @@
     text-decoration: none;
   }
 
+  /* The mark, matching assets/brand/mark.svg and the favicon: a frame, not a
+     solid square. It was drawn solid here and framed everywhere else. */
   .nav-icon {
     width: 32px;
     height: 32px;
     background: var(--indigo);
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+    clip-path: polygon(
+      0 0, 100% 0, 100% 70%, 70% 100%, 0 100%, 0 0,
+      12.5% 12.5%, 12.5% 87.5%, 65% 87.5%, 87.5% 65%, 87.5% 12.5%, 12.5% 12.5%);
     position: relative;
     flex-shrink: 0;
   }
