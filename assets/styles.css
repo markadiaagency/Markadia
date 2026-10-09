@@ -2013,6 +2013,16 @@
     .contact-inner { grid-template-columns: 1fr; gap: 50px; }
   }
 
+  /* Below ~360px the clamp floors above (40px) are wider than the content box,
+     so a long word like "Conversation." was being clipped. These only bite on
+     the narrowest phones; everything 361px and up is untouched. */
+  @media (max-width: 360px) {
+    .section-h2, .cta-h2 { font-size: 32px; }
+    .contact-channel { padding: 16px 16px; gap: 12px; }
+    .contact-channel-value { font-size: 13px; overflow-wrap: break-word; }
+    .contact-info, .contact-inner > * { min-width: 0; }
+  }
+
   @media (max-width: 640px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
@@ -2192,12 +2202,6 @@
     letter-spacing: 0.04em;
   }
 
-  .voice-stars {
-    margin-left: auto;
-    color: #fbbf24;
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
 
 
   /* ══════════════════════════════════════
