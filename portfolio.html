@@ -58,11 +58,6 @@
   .brand-logo-sm{height:20px}
   @media (max-width:640px){.brand-logo{height:23px}}
 
-  .nav-icon{width:26px;height:26px;background:var(--indigo);flex-shrink:0;
-    clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%,0 0,
-      12.5% 12.5%,12.5% 87.5%,65% 87.5%,87.5% 65%,87.5% 12.5%,12.5% 12.5%)}
-  .nav-wordmark{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.16em;
-    text-transform:uppercase}
   .nav-links{display:flex;gap:30px;list-style:none;align-items:center}
   .nav-links a{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
     color:rgba(255,255,255,.62);transition:color .2s}
@@ -317,7 +312,7 @@
 
 <footer>
   <a class="nav-brand" href="index.html" style="gap:8px">
-    <img src="assets/brand/logo-dark.png" alt="Markadia — Designed to Make a Mark." width="1120" height="247" class="brand-logo brand-logo-sm">
+    <img src="assets/brand/logo-dark-nav.png" alt="Markadia — Designed to Make a Mark." width="561" height="124" class="brand-logo brand-logo-sm">
   </a>
   <div class="socials">
     <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" aria-label="Facebook">
@@ -444,13 +439,13 @@ const CLIPS = [
   ["iced-drink",          "Two to go"],
   ["espresso-lift",       "Espresso lift"],
   ["cup-walking",         "Cup on the move"],
-  ["cafe-working",        "Working from the caf\u00e9"],
+  ["cafe-working",        "Working from the caf\u00e9", 540, 304],   /* the one landscape clip */
   ["terracotta-courtyard","Terracotta courtyard"],
   ["courtyard-meeting",   "Courtyard meeting"],
   ["cafe-interior",       "Caf\u00e9 interior"],
   ["storefront-night",    "Storefront at night"],
   ["stone-detail",        "Texture detail"],
-].map(([slug, label]) => ({ slug, label,
+].map(([slug, label, w, h]) => ({ slug, label, w: w || 540, h: h || 960,
   mp4:    "assets/video/ai/" + slug + ".mp4",
   poster: "assets/video/ai/" + slug + "-poster.jpg" }));
 
@@ -461,7 +456,7 @@ const PLAY_ICON =
 document.getElementById("vgrid").innerHTML = CLIPS.map((c, i) => `
   <button class="shot vshot" data-v="${i}" aria-label="Play ${esc(c.label)}">
     <img src="${c.poster}" alt="${esc(c.label)} \u2014 AI generated ad clip"
-         width="540" height="960" loading="lazy" decoding="async">
+         width="${c.w}" height="${c.h}" loading="lazy" decoding="async">
     <span class="vplay">${PLAY_ICON}</span>
     <span class="vlabel">${esc(c.label)}</span>
   </button>`).join("");
