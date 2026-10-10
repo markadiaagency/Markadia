@@ -1,269 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Our Work: Brand &amp; Campaign Design — Markadia</title>
-<meta name="description" content="Selected work by Markadia — campaign and social design plus AI-generated ad video, in Arabic and English, for brands across Egypt and the Gulf.">
 <link rel="canonical" href="https://markadiawave.com/portfolio.html">
-<meta name="robots" content="index, follow">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="assets/brand/icon-512.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-<meta name="theme-color" content="#062FF8">
+<meta name="description" content="Selected work by Markadia — campaign and social design plus AI-generated ad video, in Arabic and English, for brands across Egypt and the Gulf.">
 <meta property="og:title" content="Our Work: Brand &amp; Campaign Design — Markadia">
-<meta property="og:description" content="Campaign design and AI ad video for brands across Egypt and the Gulf.">
+<meta property="og:description" content="Selected work by Markadia — campaign and social design plus AI-generated ad video, in Arabic and English, for brands across Egypt and the Gulf.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://markadiawave.com/portfolio.html">
 <meta property="og:site_name" content="Markadia">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://markadiawave.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Work: Brand &amp; Campaign Design — Markadia">
+<meta name="twitter:description" content="Selected work by Markadia — campaign and social design plus AI-generated ad video, in Arabic and English, for brands across Egypt and the Gulf.">
 <meta name="twitter:image" content="https://markadiawave.com/og-image.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/brand/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#062FF8">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root{
-    --indigo:#062ff8; --indigo-dim:#143498; --cyan:#96f9fb;
-    --navy:#0e1221; --mid:#0e1221; --card:#0e1221;
-    --off-white:#ffffff; --muted:rgba(255,255,255,0.45);
-    --border:rgba(255,255,255,0.07);
-    --display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
-    --body:'Inter',system-ui,-apple-system,sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--navy);color:var(--off-white);font-family:var(--body);
-       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-
-  .skip-link{position:absolute;left:-9999px;top:0;z-index:100000;background:var(--indigo);
-    color:#fff;padding:14px 22px;border-radius:0 0 10px 0;font-weight:600}
-  .skip-link:focus{left:0}
-
-  /* ── nav ── */
-  nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;
-      justify-content:space-between;padding:20px 60px;background:rgba(6,11,26,.88);
-      backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-  .nav-brand{display:flex;align-items:center;gap:10px}
-  /* same geometry as assets/brand/mark.svg; the counter is cut out rather than
-     painted over, so the mark no longer depends on the colour behind it */
-  /* supplied lockup at a fixed height — never stretched */
-  .brand-logo{height:28px;width:auto;display:block}
-  .brand-logo-sm{height:20px}
-  @media (max-width:640px){.brand-logo{height:23px}}
-
-  .nav-links{display:flex;gap:30px;list-style:none;align-items:center}
-  .nav-links a{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
-    color:rgba(255,255,255,.62);transition:color .2s}
-  .nav-links a:hover,.nav-links a[aria-current="page"]{color:#fff}
-  .nav-links a[aria-current="page"]{color:var(--cyan)}
-  .nav-cta{background:var(--indigo);color:#fff!important;padding:11px 22px;border-radius:100px;
-    font-weight:600!important}
-  .nav-cta:hover{background:var(--indigo-dim)}
-  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:4px}
-  .hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
-  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0}
-  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .mobile-nav{position:fixed;inset:0;z-index:999;background:var(--navy);display:flex;
-    flex-direction:column;align-items:center;justify-content:center;gap:26px;
-    transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
-  .mobile-nav.open{transform:translateX(0)}
-  .mobile-nav a{font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;
-    letter-spacing:.05em}
-  .mobile-cta{background:var(--indigo);padding:12px 30px;border-radius:100px;font-size:20px!important}
-
-  /* ── hero ── */
+/* ── hero ── */
   .page-head{padding:132px 60px 34px;max-width:1280px;margin:0 auto}
-  .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:600;
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:600;
     letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
-  .eyebrow::before{content:'';width:34px;height:1px;background:var(--cyan)}
-  .page-head h1{font-family:var(--display);font-weight:900;font-size:clamp(40px,6.4vw,76px);
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--cyan)}
+.page-head h1{font-family:var(--display);font-weight:900;font-size:clamp(40px,6.4vw,76px);
     line-height:.92;text-transform:uppercase;text-wrap:balance}
-  .page-head h1 span{background:linear-gradient(135deg,var(--indigo),var(--cyan));
+.page-head h1 span{background:linear-gradient(135deg,var(--indigo),var(--cyan));
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .page-head p{margin-top:16px;max-width:60ch;color:rgba(255,255,255,.6);font-size:16px}
-
-  /* ── tabs ── */
-  .tabstrip{max-width:1280px;margin:0 auto;padding:0 60px;border-bottom:1px solid var(--border);
-    display:flex;gap:4px;flex-wrap:wrap}
-  .tab{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+.page-head p{margin-top:16px;max-width:60ch;color:rgba(255,255,255,.6);font-size:16px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
     color:rgba(255,255,255,.5);font-family:var(--display);font-weight:700;font-size:20px;
     text-transform:uppercase;letter-spacing:.05em;padding:12px 18px;cursor:pointer;
     display:inline-flex;align-items:center;gap:9px;transition:color .2s,border-color .2s}
-  .tab:hover{color:#fff}
-  .tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--indigo)}
-  .tab .soon{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.1em;
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--indigo)}
+.tab .soon{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.1em;
     text-transform:uppercase;background:rgba(150,249,251,.13);color:var(--cyan);
     padding:3px 9px;border-radius:99px}
-  .panel[hidden]{display:none!important}
-  .soon-panel{text-align:center;padding:96px 20px 110px;max-width:60ch;margin:0 auto}
-  .soon-mark{width:54px;height:54px;margin:0 auto 22px;border-radius:14px;
+.panel[hidden]{display:none!important}
+.soon-panel{text-align:center;padding:96px 20px 110px;max-width:60ch;margin:0 auto}
+.soon-mark{width:54px;height:54px;margin:0 auto 22px;border-radius:14px;
     background:rgba(6,47,248,.14);border:1px solid rgba(47,86,255,.35);
     display:flex;align-items:center;justify-content:center;color:var(--cyan)}
-  .soon-panel h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,6vw,48px);
+.soon-panel h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,6vw,48px);
     text-transform:uppercase;line-height:1}
-  .soon-panel p{color:rgba(255,255,255,.55);margin:14px 0 26px}
-  .soon-panel p a{color:var(--cyan);border-bottom:1px solid rgba(150,249,251,.4)}
-  .soon-panel p a:hover{color:#fff;border-bottom-color:#fff}
-  .soon-link{display:inline-block;font-family:var(--display);font-weight:700;font-size:17px;
+.soon-panel p{color:rgba(255,255,255,.55);margin:14px 0 26px}
+.soon-panel p a{color:var(--cyan);border-bottom:1px solid rgba(150,249,251,.4)}
+.soon-panel p a:hover{color:#fff;border-bottom-color:#fff}
+.soon-link{display:inline-block;font-family:var(--display);font-weight:700;font-size:17px;
     text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);
     border-bottom:1px solid rgba(150,249,251,.4);padding-bottom:3px}
-  .soon-link:hover{color:#fff;border-bottom-color:#fff}
-
-  /* ── projects ── */
-  main{padding:0 60px 90px;max-width:1280px;margin:0 auto}
-  .project{margin-bottom:84px}
-  .project-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+.soon-link:hover{color:#fff;border-bottom-color:#fff}
+.project{margin-bottom:84px}
+.project-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
     flex-wrap:wrap;padding-bottom:16px;margin-bottom:26px;border-bottom:1px solid var(--border)}
-  .project-head h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);
+.project-head h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);
     text-transform:uppercase;line-height:1}
-  .project-cat{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+.project-cat{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
     color:var(--muted)}
-  /* ── video grid ── */
+/* ── video grid ── */
   .vgrid .shot{aspect-ratio:9/16}
-  .vshot{position:relative}
-  .vshot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+.vshot{position:relative}
+.vshot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
     opacity:0;transition:opacity .35s}
-  .vshot.playing video{opacity:1}
-  .vshot.playing img{opacity:0}
-  .vshot img{transition:opacity .35s}
-  .vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+.vshot.playing video{opacity:1}
+.vshot.playing img{opacity:0}
+.vshot img{transition:opacity .35s}
+.vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:52px;height:52px;border-radius:50%;background:rgba(3,6,16,.55);
     backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);
     display:flex;align-items:center;justify-content:center;pointer-events:none;
     transition:opacity .25s,transform .25s}
-  .vshot.playing .vplay{opacity:0;transform:translate(-50%,-50%) scale(.8)}
-  .vplay svg{margin-left:3px}
-  .vlabel{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 11px;
+.vshot.playing .vplay{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+.vplay svg{margin-left:3px}
+.vlabel{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 11px;
     font-size:12px;font-weight:600;letter-spacing:.04em;color:#fff;text-align:left;
     pointer-events:none;
     background:linear-gradient(to top,rgba(3,6,16,.82),rgba(3,6,16,0))}
-  @media (max-width:700px){.vlabel{font-size:11px;padding:20px 9px 9px}}
-
-  /* the lightbox shows a still or a clip, depending on which tab opened it */
+/* the lightbox shows a still or a clip, depending on which tab opened it */
   .lb video{max-width:min(92vw,520px);max-height:86vh;width:auto;border-radius:10px;
     box-shadow:0 30px 80px rgba(0,0,0,.6);background:#000}
-  .lb [hidden]{display:none!important}
-
-  /* back to top — this page is the longest, and was the only one without it */
+.lb [hidden]{display:none!important}
+/* back to top — this page is the longest, and was the only one without it */
   #back-top{position:fixed;bottom:32px;right:32px;width:46px;height:46px;
     background:rgba(6,47,248,.9);border:1px solid rgba(6,47,248,.5);border-radius:50%;
     display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:600;
     opacity:0;pointer-events:none;transform:translateY(16px);
     transition:opacity .3s,transform .3s,background .2s;
     box-shadow:0 4px 20px rgba(6,47,248,.35)}
-  #back-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
-  #back-top:hover{background:var(--indigo);transform:translateY(-3px)}
-  #back-top svg{color:#fff}
-  @media (max-width:700px){#back-top{bottom:20px;right:20px}}
-  @media (max-width:360px){.page-head h1{font-size:32px}}
-  @media (prefers-reduced-motion: reduce){#back-top{transition:none}}
-  .project-brief{max-width:68ch;margin:-14px 0 30px;font-size:16px;line-height:1.8;
+#back-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+#back-top:hover{background:var(--indigo);transform:translateY(-3px)}
+#back-top svg{color:#fff}
+.project-brief{max-width:68ch;margin:-14px 0 30px;font-size:16px;line-height:1.8;
     color:rgba(255,255,255,.58)}
-  @media (max-width:700px){.project-brief{margin:4px 0 24px;font-size:15px}}
-  .shot-count{font-size:13px;color:var(--muted);white-space:nowrap}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .shot{position:relative;border:0;padding:0;background:var(--card);border-radius:12px;
+.shot-count{font-size:13px;color:var(--muted);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.shot{position:relative;border:0;padding:0;background:var(--card);border-radius:12px;
     overflow:hidden;cursor:zoom-in;aspect-ratio:4/5;transition:transform .28s,box-shadow .28s}
-  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-  .shot:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.45)}
-  .shot:hover img{transform:scale(1.04)}
-
-  /* ── lightbox ── */
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.shot:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.shot:hover img{transform:scale(1.04)}
+/* ── lightbox ── */
   .lb{position:fixed;inset:0;z-index:2000;background:rgba(3,6,16,.96);display:flex;
     align-items:center;justify-content:center;padding:24px}
-  .lb[hidden]{display:none!important}
-  .lb img{max-width:min(92vw,900px);max-height:86vh;width:auto;border-radius:10px;
+.lb[hidden]{display:none!important}
+.lb img{max-width:min(92vw,900px);max-height:86vh;width:auto;border-radius:10px;
     box-shadow:0 30px 80px rgba(0,0,0,.6)}
-  .lb-btn{position:absolute;background:rgba(255,255,255,.08);border:1px solid var(--border);
+.lb-btn{position:absolute;background:rgba(255,255,255,.08);border:1px solid var(--border);
     color:#fff;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:20px;
     display:flex;align-items:center;justify-content:center;transition:background .2s}
-  .lb-btn:hover{background:var(--indigo)}
-  .lb-close{top:22px;right:22px}
-  .lb-prev{left:22px;top:50%;transform:translateY(-50%)}
-  .lb-next{right:22px;top:50%;transform:translateY(-50%)}
-  .lb-meta{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:13px;
+.lb-btn:hover{background:var(--indigo)}
+.lb-close{top:22px;right:22px}
+.lb-prev{left:22px;top:50%;transform:translateY(-50%)}
+.lb-next{right:22px;top:50%;transform:translateY(-50%)}
+.lb-meta{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:13px;
     color:var(--muted);letter-spacing:.08em;text-transform:uppercase;text-align:center}
-
-  /* ── cta + footer ── */
-  .tail{border-top:1px solid var(--border);background:var(--mid);padding:70px 60px;text-align:center}
-  .tail h2{font-family:var(--display);font-weight:900;font-size:clamp(34px,6vw,58px);
-    text-transform:uppercase;line-height:1}
-  .tail p{color:rgba(255,255,255,.55);margin:14px auto 28px;max-width:46ch}
-  .btn{display:inline-block;background:linear-gradient(135deg,var(--indigo),var(--indigo-dim));
-    color:#fff;font-family:var(--display);font-weight:700;text-transform:uppercase;
-    letter-spacing:.09em;font-size:18px;padding:15px 42px;border-radius:100px;
-    box-shadow:0 8px 30px rgba(6,47,248,.35);transition:transform .2s}
-  .btn:hover{transform:translateY(-2px)}
-  footer{border-top:1px solid var(--border);padding:30px 60px;display:flex;align-items:center;
-    justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-  footer a:hover{color:#fff}
-  .socials{display:flex;gap:12px}
-  .socials a{width:34px;height:34px;border:1px solid var(--border);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;transition:.2s}
-  .socials a:hover{background:var(--indigo);border-color:var(--indigo);color:#fff}
-
-  @media (max-width:900px){
-    nav{padding:16px 24px}
-    .nav-links{display:none}
-    .hamburger{display:flex}
-    .page-head{padding:104px 24px 26px}
-    .tabstrip{padding:0 24px}
-    .tab{font-size:17px;padding:11px 13px}
-    main{padding:0 24px 70px}
-    .grid{grid-template-columns:repeat(2,1fr);gap:12px}
-    .tail,footer{padding-left:24px;padding-right:24px}
-    .lb-prev{left:10px}.lb-next{right:10px}
-  }
-  @media (max-width:480px){
-    .grid{gap:10px}
-    .project{margin-bottom:58px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  }
 </style>
+<script>document.documentElement.className="js"</script>
 </head>
 <body>
-<a class="skip-link" href="#panel-designs">Skip to the work</a>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html" onclick="closeMobileNav()">Home</a>
-  <a href="portfolio.html" onclick="closeMobileNav()">Work</a>
-  <a href="services.html" onclick="closeMobileNav()">Services</a>
-  <a href="about.html" onclick="closeMobileNav()">Studio</a>
-  <a href="contact.html" onclick="closeMobileNav()" class="mobile-cta">Free Consultation</a>
-</div>
-
-<nav>
-  <a class="nav-brand" href="index.html">
-    <img src="assets/brand/logo-dark-nav.png" alt="Markadia — Designed to Make a Mark." width="561" height="124" class="brand-logo">
+<nav class="nav">
+  <a class="mark" href="index.html">
+    <img src="assets/brand/logo-dark-nav.png" width="561" height="124"
+         alt="Markadia — Designed to Make a Mark.">
   </a>
-  <ul class="nav-links">
+  <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="portfolio.html" aria-current="page">Work</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="about.html">Studio</a></li>
-    <li><a href="contact.html" class="nav-cta">Free Consultation</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<header class="page-head">
-  <div class="eyebrow">Selected Work</div>
-  <h1>Brands We<br><span>Made a Mark</span><br>On.</h1>
-  <p>Campaign design and AI ad video for brands across Egypt and the Gulf — concept, copy, layout and edit, in Arabic and English, all in-house. Filmed work is next.</p>
+<main id="main">
+<header class="phead">
+  <div class="phead-in">
+    <div class="idx"><span class="no">01</span></div>
+    <div class="eyebrow">Selected work</div>
+    <h1 data-fit-group>
+      <span data-fit>Brands we</span>
+      <span data-fit>made a</span>
+      <span data-fit>mark on.</span>
+    </h1>
+    <p class="lede">Campaign design and AI ad video for brands across Egypt and the Gulf — concept, copy, layout and edit, in Arabic and English, all in-house. Filmed work is next.</p>
+  </div>
 </header>
-
 <div class="tabstrip" role="tablist" aria-label="Types of work">
   <button class="tab" role="tab" id="tab-designs" aria-controls="panel-designs" aria-selected="true">Design</button>
   <button class="tab" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="false" tabindex="-1">
@@ -304,29 +202,6 @@
       <a class="soon-link" href="contact.html">Talk to us about video →</a>
     </div>
   </div>
-</main>
-
-<section class="tail">
-  <h2>Your Brand Could<br>Be Next.</h2>
-  <p>We’d like your brand on this page. Tell us what you’re building.</p>
-  <a class="btn" href="contact.html">Start the Conversation</a>
-</section>
-
-<footer>
-  <a class="nav-brand" href="index.html" style="gap:8px">
-    <img src="assets/brand/logo-dark-nav.png" alt="Markadia — Designed to Make a Mark." width="561" height="124" class="brand-logo brand-logo-sm">
-  </a>
-  <div class="socials">
-    <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener" aria-label="Facebook">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-    <a href="https://www.instagram.com/Markadiaagency" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
-    <a href="https://www.linkedin.com/company/markadiaagency" target="_blank" rel="noopener" aria-label="LinkedIn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a>
-  </div>
-  <div>&copy; 2026 Markadia. All rights reserved. &nbsp;·&nbsp;
-    <a href="mailto:info@markadiawave.com">info@markadiawave.com</a></div>
-</footer>
 
 <button id="back-top" type="button" aria-label="Back to top">
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -339,9 +214,26 @@
   <video id="lbVid" playsinline controls preload="none" hidden></video>
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
   <div class="lb-meta" id="lbMeta"></div>
-</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged work">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <video id="lbVid" playsinline controls preload="none" hidden></video>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+  <div class="lb-meta" id="lbMeta"></div>
+<footer>
+  <div>© <span id="yr">2026</span> Markadia — Designed to Make a Mark.</div>
+  <div class="fl">
+    <a href="mailto:info@markadiawave.com">info@markadiawave.com</a>
+    <a href="https://www.instagram.com/Markadiaagency" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/markadiaagency" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
 
+<script src="assets/site.js" defer></script>
 <script>
+
 (() => {
 "use strict";
 
@@ -642,6 +534,7 @@ window.closeMobileNav = function () {
     behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
   }));
 })();
+
 </script>
 </body>
 </html>
