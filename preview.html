@@ -17,17 +17,17 @@
 
 <style>
   :root{
-    --ink:#000;
-    --off:#07090f;
-    --paper:#efebe2;
+    --ink:#000;              /* Black */
+    --paper:#ffffff;         /* White */
+    --deep:#0e1221;          /* darkest gradient stop, for secondary panels */
     --indigo:#062FF8;        /* brand primary */
-    --indigo-deep:#041FA8;
+    --indigo-deep:#143498;
     --cyan:#96f9fb;          /* brand accent */
     --indigo-wash:rgba(6,47,248,.13);
     /* the brand gradient, as specified: white through indigo to black */
     --brand-gradient:linear-gradient(135deg,#fff 0%,#4778d5 22%,#143498 46%,#102362 64%,#0e1221 82%,#000 100%);
     --rule:rgba(255,255,255,.13);
-    --rule-dark:rgba(7,9,15,.16);
+    --rule-dark:rgba(0,0,0,.16);
     --display:'Barlow Condensed',sans-serif;
     --serif:'Instrument Serif',Georgia,serif;
     --body:'Inter',sans-serif;
@@ -148,8 +148,8 @@
     background:var(--indigo)}
 
   /* ── 02 · manifesto on paper ──────────────────────── */
-  .paper{background:var(--paper);color:var(--off);padding:clamp(80px,12vw,170px) var(--g)}
-  .paper ::selection{background:var(--off);color:var(--paper)}
+  .paper{background:var(--paper);color:var(--ink);padding:clamp(80px,12vw,170px) var(--g)}
+  .paper ::selection{background:var(--ink);color:var(--paper)}
   .paper .eyebrow{color:rgba(7,9,15,.5)}
   .wrap{max-width:1180px;margin:0 auto}
   .statement{font-family:var(--display);font-weight:800;line-height:.88;
@@ -180,7 +180,7 @@
   .rail-track{display:flex;gap:clamp(14px,1.6vw,26px);padding:0 var(--g);
     width:max-content;will-change:transform}
   .card{position:relative;width:clamp(190px,21vw,290px);aspect-ratio:4/5;flex-shrink:0;
-    border-radius:3px;overflow:hidden;background:#111}
+    border-radius:3px;overflow:hidden;background:var(--deep)}
   .card.tall{aspect-ratio:9/16}
   .card img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
   .card:hover img{transform:scale(1.05)}
@@ -203,7 +203,7 @@
   }
 
   /* ── 04 · disciplines ─────────────────────────────── */
-  .disc{padding:clamp(80px,12vw,150px) var(--g);background:var(--off)}
+  .disc{padding:clamp(80px,12vw,150px) var(--g);background:var(--deep)}
   .disc ol{list-style:none;max-width:1180px;margin:22px auto 0}
   .disc li{border-top:1px solid var(--rule);position:relative}
   .disc li:last-child{border-bottom:1px solid var(--rule)}
@@ -256,7 +256,7 @@
   .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 30px;border-radius:100px;
     background:var(--indigo);color:#fff;font-size:13.5px;font-weight:600;
     transition:transform .3s,background .3s}
-  .btn:hover{transform:translateY(-3px);background:#0a3bff}
+  .btn:hover{transform:translateY(-3px);background:#4778d5}
 
   footer{border-top:1px solid var(--rule);padding:28px var(--g);display:flex;
     justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;
@@ -288,6 +288,7 @@
          alt="Markadia — Designed to Make a Mark.">
   </a>
   <ul>
+    <li><a href="index.html">Home</a></li>
     <li><a href="portfolio.html">Work</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="about.html">Studio</a></li>

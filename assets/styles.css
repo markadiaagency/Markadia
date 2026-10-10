@@ -5,14 +5,14 @@
   :root {
     --black: #000000;
     --indigo: #062ff8;
-    --indigo-dim: #0a28cc;
+    --indigo-dim: #143498;
     --indigo-glow: rgba(6,47,248,0.35);
     --cyan: #96f9fb;
     --cyan-dim: rgba(150,249,251,0.12);
     --white: #ffffff;
-    --off-white: #dce0f0;
+    --off-white: #ffffff;
     --navy: #0e1221;
-    --mid: #151929;
+    --mid: #0e1221;
     --border: rgba(255,255,255,0.07);
     --text-muted: rgba(255,255,255,0.45);
   }
@@ -266,7 +266,7 @@
     background:
       radial-gradient(ellipse 70% 60% at 80% 50%, rgba(6,47,248,0.22) 0%, transparent 65%),
       radial-gradient(ellipse 40% 40% at 20% 80%, rgba(150,249,251,0.06) 0%, transparent 55%),
-      linear-gradient(160deg, #000 0%, #0a0c1a 50%, #000 100%);
+      linear-gradient(160deg, #000 0%, #0e1221 50%, #000 100%);
   }
 
   /* Animated grid */
@@ -459,7 +459,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, var(--indigo) 0%, #1a4fff 100%);
+    background: linear-gradient(135deg, var(--indigo) 0%, #4778d5 100%);
     color: var(--white);
     text-decoration: none;
     font-size: 13px;
@@ -1367,7 +1367,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: linear-gradient(135deg, var(--indigo) 0%, #1a4fff 100%);
+    background: linear-gradient(135deg, var(--indigo) 0%, #4778d5 100%);
     color: var(--white);
     border: none;
     font-family: 'Inter', sans-serif;
@@ -1442,8 +1442,8 @@
   .dash-dot-group { display: flex; gap: 6px; }
   .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
   .dash-title-bar { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; flex: 1; text-align: center; }
-  .dash-live { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: #0fcf74; letter-spacing: 0.08em; }
-  .dash-live-dot { width: 6px; height: 6px; background: #0fcf74; border-radius: 50%; animation: blink 1.4s ease-in-out infinite; }
+  .dash-live { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: #96f9fb; letter-spacing: 0.08em; }
+  .dash-live-dot { width: 6px; height: 6px; background: #96f9fb; border-radius: 50%; animation: blink 1.4s ease-in-out infinite; }
   @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
 
   /* Metrics */
@@ -1468,7 +1468,7 @@
   }
   .dash-metric-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
   .dash-metric-delta { font-size: 10px; font-weight: 700; margin-top: 2px; }
-  .dash-metric-delta.up { color: #0fcf74; }
+  .dash-metric-delta.up { color: #96f9fb; }
 
   /* Line Chart */
   .dash-chart-area { padding: 16px 18px 8px; }
@@ -1511,7 +1511,7 @@
     animation: float-badge 4s ease-in-out infinite;
   }
   @keyframes float-badge { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
-  .dash-badge-icon { font-size: 18px; font-weight: 900; color: #0fcf74; }
+  .dash-badge-icon { font-size: 18px; font-weight: 900; color: #96f9fb; }
   .dash-badge-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 20px; color: #fff; line-height: 1; }
   .dash-badge-sub { font-size: 9px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.05em; }
 
@@ -2202,7 +2202,7 @@
     animation: blink 1.4s ease-in-out infinite;
   }
 
-  .im-dot-green { background: #0fcf74; }
+  .im-dot-green { background: #96f9fb; }
 
   /* ── LEFT: POST CARD ── */
   .im-post-card {
@@ -2326,12 +2326,12 @@
     transition: color 0.2s;
   }
 
-  .im-action-like.liked { color: #ff4d6d; }
-  .im-action-like.liked svg { fill: #ff4d6d; stroke: #ff4d6d; }
+  .im-action-like.liked { color: #062ff8; }
+  .im-action-like.liked svg { fill: #062ff8; stroke: #062ff8; }
 
   .im-publish-btn {
     width: 100%;
-    background: linear-gradient(135deg, var(--im-indigo), #1a4fff);
+    background: linear-gradient(135deg, var(--im-indigo), #4778d5);
     border: none;
     border-radius: 8px;
     padding: 12px 20px;
@@ -2351,8 +2351,8 @@
 
   .im-publish-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(6,47,248,0.45); }
   .im-publish-btn.sent {
-    background: linear-gradient(135deg, #0a9e5c, #07c274);
-    box-shadow: 0 4px 20px rgba(10,158,92,0.35);
+    background: linear-gradient(135deg, #4778d5, #96f9fb);
+    box-shadow: 0 4px 20px rgba(150,249,251,0.3);
   }
 
   /* ── CENTER: METRICS ── */
@@ -2399,7 +2399,7 @@
   .im-metric-delta {
     font-size: 11px;
     font-weight: 700;
-    color: #0fcf74;
+    color: #96f9fb;
     margin-top: 3px;
   }
 
