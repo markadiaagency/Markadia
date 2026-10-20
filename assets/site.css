@@ -206,19 +206,6 @@
     .rail-bar{display:none}
   }
 
-  /* ── the brand film ──────────────────────── */
-  .film{padding:clamp(70px,10vw,130px) var(--g);background:var(--deep)}
-  .film-in{max-width:1180px;margin:0 auto}
-  .film-frame{position:relative;margin-top:26px;aspect-ratio:16/9;overflow:hidden;
-    border:1px solid var(--rule);background:#000}
-  .film-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    opacity:0;transition:opacity .9s ease}
-  .film-frame video.on{opacity:1}
-  .film-cap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;
-    margin-top:16px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-    color:rgba(255,255,255,.52)}
-  .film-cap a{color:var(--cyan)}
-
   /* ── 04 · disciplines ─────────────────────────────── */
   .disc{padding:clamp(80px,12vw,150px) var(--g);background:var(--deep)}
   .disc ol{list-style:none;max-width:1180px;margin:22px auto 0}
