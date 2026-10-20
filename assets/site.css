@@ -206,6 +206,40 @@
     .rail-bar{display:none}
   }
 
+  /* ── the brands we've built ─────────────── */
+  /* Four identities with nothing in common — gold, a philosopher, a school,
+     a homewear label. Set in one weight of white they read as a roster
+     instead of a pile of logos. */
+  .trust{background:var(--ink);border-bottom:1px solid var(--rule);
+    padding:clamp(48px,6.5vw,86px) var(--g)}
+  .trust-in{max-width:1180px;margin:0 auto}
+  .trust-in p{margin-top:10px;color:rgba(255,255,255,.52);font-size:15px;max-width:52ch}
+  .trust-row{list-style:none;display:flex;flex-wrap:wrap;align-items:flex-end;
+    justify-content:space-between;gap:clamp(30px,5vw,64px);margin-top:clamp(30px,4vw,48px)}
+  .trust-row li{flex:0 1 auto;text-align:center}
+  .trust-row img{display:block;margin:0 auto;width:auto;opacity:.85;
+    filter:drop-shadow(0 0 1px rgba(0,0,0,.6));transition:opacity .4s ease}
+  .trust-row li:hover img{opacity:1}
+  /* sized by eye, not by number: each lockup carries a different amount of
+     type inside the same box */
+  .trust-row img[data-c=tharaa]{height:76px}
+  .trust-row img[data-c=faylasouf]{height:50px}
+  .trust-row img[data-c=sama]{height:56px}
+  .trust-row img[data-c=smsm]{height:66px}
+  .trust-row span{display:block;margin-top:14px;font-size:10px;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.46)}
+  @media (max-width:720px){
+    /* two even columns, so a long name wraps inside its own cell instead of
+       pushing the logo beside it */
+    .trust-row{gap:36px 20px}
+    .trust-row li{flex:0 0 calc(50% - 10px)}
+    .trust-row img[data-c=tharaa]{height:54px}
+    .trust-row img[data-c=faylasouf]{height:38px}
+    .trust-row img[data-c=sama]{height:42px}
+    .trust-row img[data-c=smsm]{height:48px}
+    .trust-row span{font-size:9px;letter-spacing:.16em}
+  }
+
   /* ── 04 · disciplines ─────────────────────────────── */
   .disc{padding:clamp(80px,12vw,150px) var(--g);background:var(--deep)}
   .disc ol{list-style:none;max-width:1180px;margin:22px auto 0}
