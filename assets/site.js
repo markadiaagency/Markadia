@@ -90,15 +90,48 @@ if (fine && !reduce) {
 }
 
 /* ── the headline film: fetched only when it is on screen ── */
-function film(id, src) {
-  const v = document.getElementById(id);
-  if (!v || reduce) return;              /* reduced motion keeps the still */
-  new IntersectionObserver((es) => es.forEach(e => {
-    if (e.isIntersecting) { if (!v.src) { v.src = src; v.load(); } v.play().catch(() => {}); }
-    else v.pause();
-  }), { rootMargin: "150px" }).observe(v);
-}
-film("koFilm", "assets/video/ai/smoothie-ice.mp4");
+/* ── the headline reel ──────────────────────────────────
+   The matcha clip was the palest of the sixteen and the letters read as
+   washed out, so the hero runs the high-contrast ones and changes clip
+   every few seconds: two stacked videos, one fading in as the other leaves. */
+const REEL = [
+  "cup-on-dark", "ice-cream-crumbs", "barista-pour", "v60-pour", "storefront-night",
+];
+(() => {
+  const stage = document.getElementById("koFilm");
+  if (!stage) return;
+  const reels = [...stage.querySelectorAll(".ko-reel")];
+  if (reels.length < 2) return;
+  const src = (n) => "assets/video/ai/" + n + ".mp4";
+
+  if (reduce) {                         /* one still, no motion, no download */
+    reels[0].poster = "assets/video/ai/" + REEL[0] + "-poster.jpg";
+    return;
+  }
+
+  let at = 0, front = 0, timer = null;
+  const load = (el, i) => { el.src = src(REEL[i]); el.load(); el.play().catch(() => {}); };
+
+  const advance = () => {
+    const next = (at + 1) % REEL.length;
+    const back = 1 - front;
+    load(reels[back], next);
+    reels[back].classList.add("on");
+    reels[front].classList.remove("on");
+    front = back; at = next;
+  };
+
+  const start = () => {
+    if (timer) return;
+    load(reels[0], 0);
+    reels[0].classList.add("on");
+    timer = setInterval(advance, 5200);
+  };
+  const stop = () => { clearInterval(timer); timer = null; reels.forEach(v => v.pause()); };
+
+  new IntersectionObserver((es) => es.forEach(e => e.isIntersecting ? start() : stop()),
+    { rootMargin: "150px" }).observe(stage);
+})();
 
 /* ── split the statement into words so each can land on its own beat ── */
 document.querySelectorAll("[data-split]").forEach((el) => {

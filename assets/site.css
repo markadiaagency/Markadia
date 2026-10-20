@@ -15,7 +15,7 @@
     /* the brand gradient, as specified: white through indigo to black */
     --brand-gradient:linear-gradient(135deg,#fff 0%,#4778d5 22%,#143498 46%,#102362 64%,#0e1221 82%,#000 100%);
     --rule:rgba(255,255,255,.13);
-    --rule-dark:rgba(0,0,0,.16);
+    --rule-dark:rgba(255,255,255,.17);
     --display:'Barlow Condensed',sans-serif;
     --serif:'Instrument Serif',Georgia,serif;
     --body:'Inter',sans-serif;
@@ -49,8 +49,8 @@
     background:linear-gradient(90deg,var(--indigo),transparent)}
   .idx .no{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.1em;
     color:var(--cyan)}
-  .paper .idx .no{color:var(--indigo)}
-  .paper .idx::after{background:linear-gradient(90deg,var(--indigo),transparent);opacity:.5}
+  .paper .idx .no{color:var(--cyan)}
+  .paper .idx::after{background:linear-gradient(90deg,var(--cyan),transparent);opacity:.6}
 
   /* ── custom cursor ───────────────────────────────── */
   .cursor{position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;
@@ -87,8 +87,11 @@
   .ko{position:relative;height:100svh;min-height:540px;background:#000;isolation:isolate;
     overflow:hidden}
   .ko-film{position:absolute;inset:0;z-index:0}
-  .ko-film video,.ko-film img{width:100%;height:100%;object-fit:cover;
-    filter:contrast(1.18) saturate(1.25) brightness(1.06);transform:scale(1.08)}
+  /* two stacked reels; the incoming one fades up over the outgoing */
+  .ko-film video,.ko-film img{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;filter:contrast(1.22) saturate(1.3) brightness(1.04);
+    transform:scale(1.08);opacity:0;transition:opacity 1.1s ease}
+  .ko-film video.on{opacity:1}
   .ko-plate{position:relative;z-index:1;height:100%;background:#000;
     mix-blend-mode:multiply;display:flex;align-items:center;padding:0 var(--g)}
   .ko-plate h1{width:100%}
@@ -141,28 +144,37 @@
     background:var(--indigo)}
 
   /* ── 02 · manifesto on paper ──────────────────────── */
-  .paper{background:var(--paper);color:var(--ink);padding:clamp(80px,12vw,170px) var(--g)}
-  .paper ::selection{background:var(--ink);color:var(--paper)}
-  .paper .eyebrow{color:rgba(7,9,15,.5)}
+  /* .paper is the home page's light panel; it gets the same grainy gradient
+     as .band so the whole site reads as one surface. */
+  .paper{position:relative;isolation:isolate;color:#fff;
+    padding:clamp(80px,12vw,170px) var(--g);
+    background:radial-gradient(130% 105% at 78% 12%,#143498 0%,#102362 28%,#0e1221 58%,#000 100%)}
+  .paper::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    opacity:.5;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px 180px}
+  .paper ::selection{background:#fff;color:var(--ink)}
+  .paper .eyebrow{color:rgba(255,255,255,.62)}
   .wrap{max-width:1180px;margin:0 auto}
   .statement{font-family:var(--display);font-weight:800;line-height:.88;
     letter-spacing:-.012em;text-transform:uppercase;
     font-size:clamp(38px,7.2vw,100px);max-width:16ch;margin-top:20px}
-  .statement .it{color:var(--indigo)}
+  /* indigo would sink into the gradient; cyan holds against it */
+  .statement .it{color:var(--cyan)}
   /* each word lifts in on its own beat */
   .js .w{display:inline-block;opacity:0;transform:translateY(.42em) rotate(2deg);
     transition:opacity .62s cubic-bezier(.2,.75,.3,1),transform .62s cubic-bezier(.2,.75,.3,1)}
   .js .w.in{opacity:1;transform:none}
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,5vw,76px);
     margin-top:clamp(40px,6vw,74px);padding-top:28px;border-top:1px solid var(--rule-dark)}
-  .cols p{font-size:clamp(14px,1.4vw,16px);line-height:1.85;color:rgba(7,9,15,.72);
+  .cols p{font-size:clamp(14px,1.4vw,16px);line-height:1.85;color:rgba(255,255,255,.75);
     margin-top:13px}
   @media (max-width:720px){ .cols{grid-template-columns:1fr} }
   .figs{display:flex;gap:clamp(24px,5vw,68px);flex-wrap:wrap;margin-top:34px}
   .fig b{font-family:var(--display);font-weight:800;font-size:clamp(38px,5vw,64px);
     line-height:1;letter-spacing:-.02em;display:block}
   .fig span{display:block;font-size:11px;letter-spacing:.17em;text-transform:uppercase;
-    color:rgba(7,9,15,.5);margin-top:5px}
+    color:rgba(255,255,255,.6);margin-top:5px}
 
   /* ── 03 · the work, pinned and travelling sideways ── */
   .rail{position:relative;background:var(--ink)}
@@ -282,9 +294,18 @@
   .phead .lede a{color:var(--cyan);border-bottom:1px solid rgba(150,249,251,.4)}
 
   /* a band of paper, for sections that need to breathe */
-  .band{background:var(--paper);color:var(--ink);padding:clamp(70px,10vw,140px) var(--g)}
-  .band .eyebrow{color:rgba(0,0,0,.5)}
-  .band ::selection{background:var(--ink);color:var(--paper)}
+  /* Markadia's own posters are a grainy blue gradient, so the light panels use
+     that instead of flat white: the gradient from the guidelines, with a grain
+     layer over it. Text goes back to white. */
+  .band{position:relative;isolation:isolate;color:#fff;
+    padding:clamp(70px,10vw,140px) var(--g);
+    background:radial-gradient(130% 105% at 78% 12%,#143498 0%,#102362 28%,#0e1221 58%,#000 100%)}
+  .band::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    opacity:.5;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px 180px}
+  .band .eyebrow{color:rgba(255,255,255,.62)}
+  .band ::selection{background:#fff;color:var(--ink)}
 
   /* numbered list rows, used for services and for disciplines */
   .rows{list-style:none;max-width:1180px;margin:22px auto 0}
@@ -300,7 +321,7 @@
   .rows li:hover .row{padding-left:clamp(10px,1.8vw,26px)}
   .rows .n{font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.3);
     min-width:2.4ch;flex-shrink:0}
-  .band .rows .n{color:rgba(0,0,0,.35)}
+  .band .rows .n{color:rgba(255,255,255,.4)}
   .rows .t{font-family:var(--display);font-weight:800;text-transform:uppercase;
     font-size:clamp(26px,4.6vw,62px);line-height:.92;letter-spacing:-.015em;
     transition:color .35s}
@@ -311,7 +332,7 @@
      sit in the same section, so they have to say they wrap. */
   .rows .d{font-size:14px;line-height:1.75;color:rgba(255,255,255,.62);
     text-align:left;white-space:normal;min-width:0}
-  .band .rows .d{color:rgba(0,0,0,.66)}
+  .band .rows .d{color:rgba(255,255,255,.7)}
 
   /* the badge on a newly launched service */
   .service-badge{display:inline-block;vertical-align:middle;margin-inline-start:10px;
@@ -329,7 +350,7 @@
   @media (max-width:760px){ .duo{grid-template-columns:1fr} }
 
   /* the deliverables list: a plain numbered column, no hover travel */
-  .rows.plain li{border-color:rgba(0,0,0,.14)}
+  .rows.plain li{border-color:rgba(255,255,255,.15)}
   .rows.plain li{display:flex;align-items:baseline;gap:18px;
     padding:clamp(11px,1.4vw,16px) 0;font-size:clamp(15px,1.8vw,19px)}
   .rows.plain .n{display:inline;font-family:var(--display);font-weight:700;
@@ -339,10 +360,10 @@
   /* who we work with — a grid of short cards on paper */
   .whos{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,30px);
     margin-top:clamp(34px,5vw,56px)}
-  .whos .who{border-top:1px solid rgba(0,0,0,.16);padding-top:16px}
+  .whos .who{border-top:1px solid rgba(255,255,255,.17);padding-top:16px}
   .whos h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
     font-size:clamp(17px,1.9vw,23px);letter-spacing:.01em;line-height:1.05}
-  .whos p{margin-top:8px;font-size:13.5px;line-height:1.7;color:rgba(0,0,0,.62)}
+  .whos p{margin-top:8px;font-size:13.5px;line-height:1.7;color:rgba(255,255,255,.7)}
   @media (max-width:900px){ .whos{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:460px){ .whos{grid-template-columns:1fr} }
 
@@ -397,21 +418,21 @@
 
   /* ── FAQ ────────────────────────────────────────────── */
   .faq{list-style:none;max-width:1180px;margin:clamp(30px,4vw,48px) auto 0}
-  .faq-item{border-top:1px solid rgba(0,0,0,.16)}
-  .faq-item:last-child{border-bottom:1px solid rgba(0,0,0,.16)}
+  .faq-item{border-top:1px solid rgba(255,255,255,.17)}
+  .faq-item:last-child{border-bottom:1px solid rgba(255,255,255,.17)}
   .faq-q{width:100%;background:none;border:0;cursor:pointer;text-align:left;
     display:flex;align-items:center;justify-content:space-between;gap:20px;
     padding:clamp(16px,2vw,24px) 0;font-family:var(--display);font-weight:800;
-    text-transform:uppercase;letter-spacing:.01em;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.01em;color:#fff;
     font-size:clamp(17px,2.2vw,27px);line-height:1.15;transition:color .25s}
-  .faq-q:hover{color:var(--indigo)}
+  .faq-q:hover{color:var(--cyan)}
   .faq-q i{position:relative;width:15px;height:15px;flex-shrink:0}
-  .faq-q i::before,.faq-q i::after{content:"";position:absolute;background:var(--indigo);
+  .faq-q i::before,.faq-q i::after{content:"";position:absolute;background:var(--cyan);
     inset:50% 0 auto 0;height:2px;transition:transform .3s}
   .faq-q i::after{transform:rotate(90deg)}
   .faq-q[aria-expanded="true"] i::after{transform:rotate(0)}
   .faq-a p{padding:0 0 22px;max-width:70ch;font-size:15px;line-height:1.85;
-    color:rgba(0,0,0,.68)}
+    color:rgba(255,255,255,.72)}
 
   /* .disc .d hides itself under 720px for the home page's short labels; the
      service and archetype rows carry real copy, so they stay. */
