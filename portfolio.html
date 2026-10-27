@@ -40,30 +40,10 @@
 .page-head h1 span{background:linear-gradient(135deg,var(--indigo),var(--cyan));
     -webkit-background-clip:text;background-clip:text;color:transparent}
 .page-head p{margin-top:16px;max-width:60ch;color:rgba(255,255,255,.6);font-size:16px}
-.tab{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
-    color:rgba(255,255,255,.5);font-family:var(--display);font-weight:700;font-size:20px;
-    text-transform:uppercase;letter-spacing:.05em;padding:12px 18px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:9px;transition:color .2s,border-color .2s}
-.tab:hover{color:#fff}
-.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--indigo)}
-.tab .soon{font-family:var(--body);font-size:10px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;background:rgba(150,249,251,.13);color:var(--cyan);
-    padding:3px 9px;border-radius:99px}
-.panel[hidden]{display:none!important}
-.soon-panel{text-align:center;padding:96px 20px 110px;max-width:60ch;margin:0 auto}
-.soon-mark{width:54px;height:54px;margin:0 auto 22px;border-radius:14px;
-    background:rgba(6,47,248,.14);border:1px solid rgba(47,86,255,.35);
-    display:flex;align-items:center;justify-content:center;color:var(--cyan)}
-.soon-panel h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,6vw,48px);
-    text-transform:uppercase;line-height:1}
-.soon-panel p{color:rgba(255,255,255,.55);margin:14px 0 26px}
-.soon-panel p a{color:var(--cyan);border-bottom:1px solid rgba(150,249,251,.4)}
-.soon-panel p a:hover{color:#fff;border-bottom-color:#fff}
-.soon-link{display:inline-block;font-family:var(--display);font-weight:700;font-size:17px;
-    text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);
-    border-bottom:1px solid rgba(150,249,251,.4);padding-bottom:3px}
-.soon-link:hover{color:#fff;border-bottom-color:#fff}
-.project{margin-bottom:84px}
+/* the same gutter and measure as every other page: this ran edge to edge,
+   which clipped the piece count and left the brief touching both sides */
+#work{padding:clamp(30px,4.5vw,52px) var(--g) 0}
+.project{max-width:1180px;margin:0 auto 84px}
 .project-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
     flex-wrap:wrap;padding-bottom:16px;margin-bottom:26px;border-bottom:1px solid var(--border)}
 .project-head h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);
@@ -85,6 +65,7 @@
     color:rgba(255,255,255,.58)}
 .shot-count{font-size:13px;color:var(--muted);white-space:nowrap}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);gap:12px} }
 .shot{position:relative;border:0;padding:0;background:var(--card);border-radius:12px;
     overflow:hidden;cursor:zoom-in;aspect-ratio:4/5;transition:transform .28s,box-shadow .28s}
 .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
@@ -137,30 +118,10 @@
       <span data-fit>made a</span>
       <span data-fit>mark on.</span>
     </h1>
-    <p class="lede">Campaign design for brands across Egypt and the Gulf — concept, copy and layout, in Arabic and English, all in-house. Filmed work is next.</p>
+    <p class="lede">Campaign design for brands across Egypt and the Gulf — concept, copy and layout, in Arabic and English, all in-house.</p>
   </div>
 </header>
-<div class="tabstrip" role="tablist" aria-label="Types of work">
-  <button class="tab" role="tab" id="tab-designs" aria-controls="panel-designs" aria-selected="true">Design</button>
-  <button class="tab" role="tab" id="tab-real" aria-controls="panel-real" aria-selected="false" tabindex="-1">
-    Live Action <span class="soon">Soon</span></button>
-</div>
-
-<main>
-  <div class="panel" id="panel-designs" role="tabpanel" aria-labelledby="tab-designs" tabindex="0"></div>
-
-  <div class="panel" id="panel-real" role="tabpanel" aria-labelledby="tab-real" tabindex="0" hidden>
-    <div class="soon-panel">
-      <div class="soon-mark" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 5h18v14H3z"/><path d="M7 5v14M17 5v14M3 12h18"/></svg>
-      </div>
-      <h2>Live Action</h2>
-      <p>Filmed work — product, campaign and social, shot on camera — is in
-         production. Need it before this tab fills up? Say so.</p>
-      <a class="soon-link" href="contact.html">Talk to us about video →</a>
-    </div>
-  </div>
+<div id="work"></div>
 </main>
 
 <button id="back-top" type="button" aria-label="Back to top">
@@ -253,7 +214,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, c =>
 const flat = [];
 PROJECTS.forEach(p => p.shots.forEach(f => flat.push({ file: f, project: p.title })));
 
-document.getElementById("panel-designs").innerHTML = PROJECTS.map(p => `
+document.getElementById("work").innerHTML = PROJECTS.map(p => `
   <section class="project">
     <div class="project-head">
       <div>
@@ -326,53 +287,6 @@ lb.addEventListener("touchend", (e) => {
   if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
   x0 = null;
 }, { passive: true });
-
-/* ── tabs ──
-   Each tab has its own address (#design, #live-action) so one can be linked
-   to directly, from off the page or from the other tab on it. */
-const TABS = [
-  { btn: "tab-designs", panel: "panel-designs", hash: "design" },
-  { btn: "tab-real",    panel: "panel-real",    hash: "live-action" },
-];
-
-function selectTab(idx, { focus = false, push = true } = {}) {
-  TABS.forEach((t, i) => {
-    const btn = document.getElementById(t.btn);
-    const panel = document.getElementById(t.panel);
-    const on = i === idx;
-    btn.setAttribute("aria-selected", on ? "true" : "false");
-    btn.tabIndex = on ? 0 : -1;
-    panel.hidden = !on;
-  });
-  if (focus) document.getElementById(TABS[idx].btn).focus();
-  if (push && history.replaceState) {
-    history.replaceState(null, "", "#" + TABS[idx].hash);
-  }
-}
-
-TABS.forEach((t, i) => {
-  const btn = document.getElementById(t.btn);
-  btn.addEventListener("click", () => selectTab(i));
-  btn.addEventListener("keydown", (e) => {
-    const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-    if (step) {
-      e.preventDefault();
-      selectTab((i + step + TABS.length) % TABS.length, { focus: true });
-    }
-    if (e.key === "Home") { e.preventDefault(); selectTab(0, { focus: true }); }
-    if (e.key === "End")  { e.preventDefault(); selectTab(TABS.length - 1, { focus: true }); }
-  });
-});
-
-const tabFromHash = () => TABS.findIndex(t => t.hash === location.hash.slice(1));
-selectTab(Math.max(tabFromHash(), 0), { push: false });
-
-/* Follow the address bar afterwards too: a link to #live-action from elsewhere
-   on this page, or the back button, has to move the tab. */
-addEventListener("hashchange", () => {
-  const i = tabFromHash();
-  if (i !== -1) selectTab(i, { push: false });
-});
 
 /* ── mobile nav ── */
 window.toggleMobileNav = function () {

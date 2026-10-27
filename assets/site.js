@@ -190,7 +190,7 @@ const WORK = [
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const track = document.getElementById("railTrack");
 if (track) track.innerHTML = WORK.map(([src, name, cat]) => `
-  <a class="card" href="portfolio.html#design">
+  <a class="card" href="portfolio.html">
     <img src="${src}" alt="${esc(name)} — ${esc(cat)}" loading="lazy" decoding="async">
     <figcaption>${esc(name)} · ${esc(cat)}</figcaption>
   </a>`).join("");
