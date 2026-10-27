@@ -172,26 +172,25 @@ document.querySelectorAll("[data-count]").forEach((el) => {
 });
 
 /* ── the work rail ───────────────────────────────────────
-   Thumbnails the studio already has: designs in 4:5, clips in 9:16. */
+   Thumbnails the studio already has, all 4:5. */
 const WORK = [
-  ["assets/portfolio/smash-burger-01-thumb.jpg", "Smash Burger", "Food & Beverage", 0],
-  ["assets/video/ai/smoothie-ice-poster.jpg",    "Matcha splash", "AI ad video", 1],
-  ["assets/portfolio/sama-school-02-thumb.jpg",  "Sama School", "Education", 0],
-  ["assets/portfolio/glowy-03-thumb.jpg",        "Glowy", "Beauty", 0],
-  ["assets/video/ai/cup-on-dark-poster.jpg",     "Iced hibiscus", "AI ad video", 1],
-  ["assets/portfolio/smash-burger-05-thumb.jpg", "Smash Burger", "Food & Beverage", 0],
-  ["assets/video/ai/v60-pour-poster.jpg",        "Iced pour-over", "AI ad video", 1],
-  ["assets/portfolio/sama-school-07-thumb.jpg",  "Sama School", "Education", 0],
-  ["assets/portfolio/glowy-06-thumb.jpg",        "Glowy", "Beauty", 0],
-  ["assets/video/ai/ice-cream-crumbs-poster.jpg","Lotus ice cream", "AI ad video", 1],
-  ["assets/portfolio/smash-burger-08-thumb.jpg", "Smash Burger", "Food & Beverage", 0],
-  ["assets/video/ai/barista-pour-poster.jpg",    "Latte pour", "AI ad video", 1],
+  ["assets/portfolio/smash-burger-01-thumb.jpg", "Smash Burger", "Food & Beverage"],
+  ["assets/portfolio/glowy-01-thumb.jpg",        "Glowy", "Beauty"],
+  ["assets/portfolio/sama-school-02-thumb.jpg",  "Sama School", "Education"],
+  ["assets/portfolio/glowy-03-thumb.jpg",        "Glowy", "Beauty"],
+  ["assets/portfolio/smash-burger-03-thumb.jpg", "Smash Burger", "Food & Beverage"],
+  ["assets/portfolio/smash-burger-05-thumb.jpg", "Smash Burger", "Food & Beverage"],
+  ["assets/portfolio/sama-school-04-thumb.jpg",  "Sama School", "Education"],
+  ["assets/portfolio/sama-school-07-thumb.jpg",  "Sama School", "Education"],
+  ["assets/portfolio/glowy-06-thumb.jpg",        "Glowy", "Beauty"],
+  ["assets/portfolio/glowy-08-thumb.jpg",        "Glowy", "Beauty"],
+  ["assets/portfolio/smash-burger-08-thumb.jpg", "Smash Burger", "Food & Beverage"],
+  ["assets/portfolio/sama-school-09-thumb.jpg",  "Sama School", "Education"],
 ];
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const track = document.getElementById("railTrack");
-if (track) track.innerHTML = WORK.map(([src, name, cat, tall]) => `
-  <a class="card${tall ? " tall" : ""}" href="portfolio.html${tall ? "#ai-video" : "#design"}">
-    ${tall ? '<span class="tag">Video</span>' : ""}
+if (track) track.innerHTML = WORK.map(([src, name, cat]) => `
+  <a class="card" href="portfolio.html#design">
     <img src="${src}" alt="${esc(name)} — ${esc(cat)}" loading="lazy" decoding="async">
     <figcaption>${esc(name)} · ${esc(cat)}</figcaption>
   </a>`).join("");

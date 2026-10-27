@@ -70,28 +70,6 @@
     text-transform:uppercase;line-height:1}
 .project-cat{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
     color:var(--muted)}
-/* ── video grid ── */
-  .vgrid .shot{aspect-ratio:9/16}
-.vshot{position:relative}
-.vshot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    opacity:0;transition:opacity .35s}
-.vshot.playing video{opacity:1}
-.vshot.playing img{opacity:0}
-.vshot img{transition:opacity .35s}
-.vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:52px;height:52px;border-radius:50%;background:rgba(3,6,16,.55);
-    backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);
-    display:flex;align-items:center;justify-content:center;pointer-events:none;
-    transition:opacity .25s,transform .25s}
-.vshot.playing .vplay{opacity:0;transform:translate(-50%,-50%) scale(.8)}
-.vplay svg{margin-left:3px}
-.vlabel{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 11px;
-    font-size:12px;font-weight:600;letter-spacing:.04em;color:#fff;text-align:left;
-    pointer-events:none;
-    background:linear-gradient(to top,rgba(3,6,16,.82),rgba(3,6,16,0))}
-/* the lightbox shows a still or a clip, depending on which tab opened it */
-  .lb video{max-width:min(92vw,520px);max-height:86vh;width:auto;border-radius:10px;
-    box-shadow:0 30px 80px rgba(0,0,0,.6);background:#000}
 .lb [hidden]{display:none!important}
 /* back to top — this page is the longest, and was the only one without it */
   #back-top{position:fixed;bottom:32px;right:32px;width:46px;height:46px;
@@ -159,35 +137,17 @@
       <span data-fit>made a</span>
       <span data-fit>mark on.</span>
     </h1>
-    <p class="lede">Campaign design and AI ad video for brands across Egypt and the Gulf — concept, copy, layout and edit, in Arabic and English, all in-house. Filmed work is next.</p>
+    <p class="lede">Campaign design for brands across Egypt and the Gulf — concept, copy and layout, in Arabic and English, all in-house. Filmed work is next.</p>
   </div>
 </header>
 <div class="tabstrip" role="tablist" aria-label="Types of work">
   <button class="tab" role="tab" id="tab-designs" aria-controls="panel-designs" aria-selected="true">Design</button>
-  <button class="tab" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="false" tabindex="-1">
-    AI Video</button>
   <button class="tab" role="tab" id="tab-real" aria-controls="panel-real" aria-selected="false" tabindex="-1">
     Live Action <span class="soon">Soon</span></button>
 </div>
 
 <main>
   <div class="panel" id="panel-designs" role="tabpanel" aria-labelledby="tab-designs" tabindex="0"></div>
-
-  <div class="panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0" hidden>
-    <section class="project">
-      <div class="project-head">
-        <div>
-          <div class="project-cat">Food &amp; Beverage</div>
-          <h2>AI Ad Video</h2>
-        </div>
-        <div class="shot-count">16 clips</div>
-      </div>
-      <p class="project-brief">Short vertical spots generated with AI, built for paid social
-        and reels — product hero shots, store and lifestyle footage, each one ten seconds and
-        cut to drop straight into a campaign. No crew, no shoot day, no location fee.</p>
-      <div class="grid vgrid" id="vgrid"></div>
-    </section>
-  </div>
 
   <div class="panel" id="panel-real" role="tabpanel" aria-labelledby="tab-real" tabindex="0" hidden>
     <div class="soon-panel">
@@ -196,12 +156,12 @@
           <path d="M3 5h18v14H3z"/><path d="M7 5v14M17 5v14M3 12h18"/></svg>
       </div>
       <h2>Live Action</h2>
-      <p>The <a href="#ai-video">AI tab</a> is live; this one is filmed work — product,
-         campaign and social, shot on camera — and it is in production. Need it before this
-         tab fills up? Say so.</p>
+      <p>Filmed work — product, campaign and social, shot on camera — is in
+         production. Need it before this tab fills up? Say so.</p>
       <a class="soon-link" href="contact.html">Talk to us about video →</a>
     </div>
   </div>
+</main>
 
 <button id="back-top" type="button" aria-label="Back to top">
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -211,16 +171,10 @@
   <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
   <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
   <img id="lbImg" src="" alt="">
-  <video id="lbVid" playsinline controls preload="none" hidden></video>
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
   <div class="lb-meta" id="lbMeta"></div>
-<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged work">
-  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
-  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
-  <img id="lbImg" src="" alt="">
-  <video id="lbVid" playsinline controls preload="none" hidden></video>
-  <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
-  <div class="lb-meta" id="lbMeta"></div>
+</div>
+
 <footer>
   <div>© <span id="yr">2026</span> Markadia — Designed to Make a Mark.</div>
   <div class="fl">
@@ -320,95 +274,18 @@ document.getElementById("panel-designs").innerHTML = PROJECTS.map(p => `
     </div>
   </section>`).join("");
 
-/* ── AI video clips ──
-   Ordered for the grid: product and motion first, then people and place. */
-const CLIPS = [
-  ["smoothie-ice",        "Matcha splash"],
-  ["barista-pour",        "Latte pour"],
-  ["cup-on-dark",         "Iced hibiscus"],
-  ["ice-cream-crumbs",    "Lotus ice cream"],
-  ["v60-pour",            "Iced pour-over"],
-  ["brownie-fork",        "Brownie, fork press"],
-  ["coffee-beans",        "Coffee beans"],
-  ["iced-drink",          "Two to go"],
-  ["espresso-lift",       "Espresso lift"],
-  ["cup-walking",         "Cup on the move"],
-  ["cafe-working",        "Working from the caf\u00e9", 540, 304],   /* the one landscape clip */
-  ["terracotta-courtyard","Terracotta courtyard"],
-  ["courtyard-meeting",   "Courtyard meeting"],
-  ["cafe-interior",       "Caf\u00e9 interior"],
-  ["storefront-night",    "Storefront at night"],
-  ["stone-detail",        "Texture detail"],
-].map(([slug, label, w, h]) => ({ slug, label, w: w || 540, h: h || 960,
-  mp4:    "assets/video/ai/" + slug + ".mp4",
-  poster: "assets/video/ai/" + slug + "-poster.jpg" }));
-
-const PLAY_ICON =
-  '<svg width="17" height="17" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">' +
-  '<path d="M8 5v14l11-7z"/></svg>';
-
-document.getElementById("vgrid").innerHTML = CLIPS.map((c, i) => `
-  <button class="shot vshot" data-v="${i}" aria-label="Play ${esc(c.label)}">
-    <img src="${c.poster}" alt="${esc(c.label)} \u2014 AI generated ad clip"
-         width="${c.w}" height="${c.h}" loading="lazy" decoding="async">
-    <span class="vplay">${PLAY_ICON}</span>
-    <span class="vlabel">${esc(c.label)}</span>
-  </button>`).join("");
-
-/* Preview on hover, but only where hovering is a real thing and the visitor
-   has not asked for less motion. Nothing downloads until the pointer lands. */
-const canHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
-const stillOk  = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (canHover && stillOk) {
-  document.getElementById("vgrid").addEventListener("pointerenter", (e) => {
-    const tile = e.target.closest(".vshot");
-    if (!tile || tile.querySelector("video")) return;
-    const c = CLIPS[Number(tile.dataset.v)];
-    const v = document.createElement("video");
-    v.src = c.mp4; v.muted = true; v.loop = true; v.playsInline = true;
-    v.preload = "auto"; v.setAttribute("aria-hidden", "true");
-    tile.appendChild(v);
-    v.play().then(() => tile.classList.add("playing")).catch(() => {});
-  }, true);
-
-  document.getElementById("vgrid").addEventListener("pointerleave", (e) => {
-    const tile = e.target.closest(".vshot");
-    if (!tile) return;
-    tile.classList.remove("playing");
-    const v = tile.querySelector("video");
-    if (v) { v.pause(); v.remove(); }
-  }, true);
-}
-
 /* ── lightbox ── */
 const lb    = document.getElementById("lb");
 const lbImg = document.getElementById("lbImg");
-const lbVid = document.getElementById("lbVid");
 const lbMeta= document.getElementById("lbMeta");
 let at = 0, opener = null, seq = flat;   /* seq: the set the arrows walk */
 
 function show(i) {
   at = (i + seq.length) % seq.length;
   const s = seq[at];
-  const isClip = !!s.mp4;
-
-  lbVid.pause();
-  lbImg.hidden = isClip;
-  lbVid.hidden = !isClip;
-
-  if (isClip) {
-    lbImg.src = "";
-    lbVid.src = s.mp4;
-    lbVid.poster = s.poster;
-    lbVid.play().catch(() => {});       /* a blocked autoplay just waits for the control */
-    lbMeta.textContent = `${s.label} — ${at + 1} / ${seq.length}`;
-  } else {
-    lbVid.removeAttribute("src");
-    lbVid.load();
-    lbImg.src = fullOf(s.file);
-    lbImg.alt = s.project + " campaign design";
-    lbMeta.textContent = `${s.project} — ${at + 1} / ${seq.length}`;
-  }
+  lbImg.src = fullOf(s.file);
+  lbImg.alt = s.project + " campaign design";
+  lbMeta.textContent = `${s.project} — ${at + 1} / ${seq.length}`;
 }
 function open(i, btn, set) {
   seq = set || flat;
@@ -420,21 +297,15 @@ function open(i, btn, set) {
 }
 function close() {
   lb.hidden = true;
-  lbVid.pause();
-  lbVid.removeAttribute("src");
-  lbVid.load();
   lbImg.src = "";
   document.body.style.overflow = "";
   if (opener) opener.focus();
 }
 
 document.addEventListener("click", (e) => {
-  const tile = e.target.closest(".vshot");
-  if (tile) { open(Number(tile.dataset.v), tile, CLIPS); return; }
   const shot = e.target.closest(".shot");
   if (shot) { open(Number(shot.dataset.i), shot); return; }
   if (e.target.id === "lbClose" || e.target === lb) { close(); return; }
-  if (e.target === lbVid) return;   /* let the player handle its own controls */
   if (e.target.id === "lbPrev") { show(at - 1); return; }
   if (e.target.id === "lbNext") { show(at + 1); return; }
 });
@@ -457,11 +328,10 @@ lb.addEventListener("touchend", (e) => {
 }, { passive: true });
 
 /* ── tabs ──
-   Each tab has its own address (#design, #ai-video, #live-action) so one can
-   be linked to directly, from off the page or from another tab on it. */
+   Each tab has its own address (#design, #live-action) so one can be linked
+   to directly, from off the page or from the other tab on it. */
 const TABS = [
   { btn: "tab-designs", panel: "panel-designs", hash: "design" },
-  { btn: "tab-ai",      panel: "panel-ai",      hash: "ai-video" },
   { btn: "tab-real",    panel: "panel-real",    hash: "live-action" },
 ];
 
@@ -497,8 +367,8 @@ TABS.forEach((t, i) => {
 const tabFromHash = () => TABS.findIndex(t => t.hash === location.hash.slice(1));
 selectTab(Math.max(tabFromHash(), 0), { push: false });
 
-/* Follow the address bar afterwards too: a link to #ai-video from elsewhere on
-   this page, or the back button, has to move the tab. */
+/* Follow the address bar afterwards too: a link to #live-action from elsewhere
+   on this page, or the back button, has to move the tab. */
 addEventListener("hashchange", () => {
   const i = tabFromHash();
   if (i !== -1) selectTab(i, { push: false });
