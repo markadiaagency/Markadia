@@ -203,6 +203,11 @@
     .rail-bar{display:none}
   }
 
+  /* an Arabic phrase inside an English sentence: its own face, and isolated
+     so the bidi algorithm does not drag the surrounding punctuation around */
+  .ar{font-family:'IBM Plex Sans Arabic',sans-serif;unicode-bidi:isolate;
+    font-size:1.04em;font-weight:500}
+
   /* ── the brands we've built ─────────────── */
   /* Four identities with nothing in common — gold, a philosopher, a school,
      a homewear label. Set in one weight of white they read as a roster
