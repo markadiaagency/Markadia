@@ -174,16 +174,16 @@ document.querySelectorAll("[data-count]").forEach((el) => {
 /* ── the work rail ───────────────────────────────────────
    Thumbnails the studio already has, all 4:5. */
 const WORK = [
+  ["assets/portfolio/tharaa-01-thumb.jpg",       "Tharaa", "Finance & Investment"],
   ["assets/portfolio/smash-burger-01-thumb.jpg", "Smash Burger", "Food & Beverage"],
   ["assets/portfolio/glowy-01-thumb.jpg",        "Glowy", "Beauty"],
   ["assets/portfolio/sama-school-02-thumb.jpg",  "Sama School", "Education"],
+  ["assets/portfolio/tharaa-08-thumb.jpg",       "Tharaa", "Finance & Investment"],
   ["assets/portfolio/glowy-03-thumb.jpg",        "Glowy", "Beauty"],
-  ["assets/portfolio/smash-burger-03-thumb.jpg", "Smash Burger", "Food & Beverage"],
   ["assets/portfolio/smash-burger-05-thumb.jpg", "Smash Burger", "Food & Beverage"],
   ["assets/portfolio/sama-school-04-thumb.jpg",  "Sama School", "Education"],
-  ["assets/portfolio/sama-school-07-thumb.jpg",  "Sama School", "Education"],
+  ["assets/portfolio/tharaa-09-thumb.jpg",       "Tharaa", "Finance & Investment"],
   ["assets/portfolio/glowy-06-thumb.jpg",        "Glowy", "Beauty"],
-  ["assets/portfolio/glowy-08-thumb.jpg",        "Glowy", "Beauty"],
   ["assets/portfolio/smash-burger-08-thumb.jpg", "Smash Burger", "Food & Beverage"],
   ["assets/portfolio/sama-school-09-thumb.jpg",  "Sama School", "Education"],
 ];
