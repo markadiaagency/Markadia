@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tharaa Precious Metals: Launch Case Study | Markadia</title>
+<link rel="canonical" href="https://markadiawave.com/tharaa.html">
+<meta name="description" content="How Markadia built the launch identity and social system for Tharaa Precious Metals, a gold and silver app in the UAE, in Arabic, English and Hindi.">
+<meta property="og:title" content="Tharaa Precious Metals: Launch Case Study | Markadia">
+<meta property="og:description" content="How Markadia built the launch identity and social system for Tharaa Precious Metals, a gold and silver app in the UAE, in Arabic, English and Hindi.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://markadiawave.com/tharaa.html">
+<meta property="og:site_name" content="Markadia">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://markadiawave.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tharaa Precious Metals: Launch Case Study | Markadia">
+<meta name="twitter:description" content="How Markadia built the launch identity and social system for Tharaa Precious Metals, a gold and silver app in the UAE, in Arabic, English and Hindi.">
+<meta name="twitter:image" content="https://markadiawave.com/og-image.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/brand/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#213351">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/portfolio/tharaa-02.jpg">
+
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* ──────────────────────────────────────────────────────────────
+   Tharaa case study.
+   The palette is sampled from the artwork itself, not invented:
+   navy rgb(33,51,81), gold highlight rgb(226,203,130), mid gold
+   rgb(185,156,77). The page borrows the brand's type and nothing
+   else, because for its length the client's world is the subject.
+   Motion is CSS only. No WebGL, no canvas, no library.
+   ────────────────────────────────────────────────────────────── */
+.case{
+  --navy:#213351;
+  --navy-deep:#16243c;
+  --navy-lift:#2b4166;
+  --gold:#e2cb82;
+  --gold-mid:#b99c4d;
+  --gold-deep:#8c6d1d;
+  --case-rule:rgba(226,203,130,.22);
+  --m:clamp(20px,5vw,80px);
+  background:var(--navy-deep);
+  color:#fff;
+}
+.case ::selection{background:var(--gold);color:var(--navy-deep)}
+
+/* ── reveal: one class, driven by the observer below ── */
+.case .rv{opacity:0;transform:translateY(26px);
+  transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.case .rv.in{opacity:1;transform:none}
+.case .rv.d1{transition-delay:.09s}
+.case .rv.d2{transition-delay:.18s}
+.case .rv.d3{transition-delay:.27s}
+@media (prefers-reduced-motion:reduce){
+  .case .rv{opacity:1;transform:none;transition:none}
+}
+
+/* ── hero ── */
+.c-hero{position:relative;min-height:100svh;display:grid;align-items:center;
+  padding:150px var(--m) 92px;overflow:hidden;
+  background:radial-gradient(130% 95% at 72% 32%,var(--navy-lift) 0%,var(--navy) 42%,var(--navy-deep) 100%)}
+.c-hero-in{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,72px);align-items:center}
+.c-kicker{display:flex;align-items:center;gap:13px;font-size:11px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.c-kicker::before{content:'';width:32px;height:1px;background:var(--gold)}
+.c-hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(46px,8.2vw,104px);line-height:.86;letter-spacing:-.02em;text-wrap:balance}
+.c-hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.01em;color:var(--gold)}
+.c-ar{font-family:'IBM Plex Sans Arabic',sans-serif;unicode-bidi:isolate}
+.c-hero .c-sub{margin-top:26px;max-width:46ch;font-size:clamp(15px,1.5vw,18px);
+  line-height:1.62;color:rgba(255,255,255,.72)}
+.c-facts{display:flex;flex-wrap:wrap;gap:30px 46px;margin-top:40px;
+  padding-top:28px;border-top:1px solid var(--case-rule)}
+.c-facts div span{display:block;font-size:10px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:7px}
+.c-facts div b{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.01em}
+.c-hero-art{position:relative}
+.c-hero-art img{width:100%;height:auto;border-radius:3px;
+  box-shadow:0 44px 90px -24px rgba(0,0,0,.72)}
+/* the case rises a little as the page is scrolled, where the browser can
+   drive it from scroll position rather than from a timer */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .c-hero-art img{animation:floatUp linear both;animation-timeline:view();
+      animation-range:cover 0% cover 100%}
+    @keyframes floatUp{from{transform:translateY(34px) scale(1.015)}
+      to{transform:translateY(-34px) scale(1.015)}}
+  }
+}
+.c-scroll{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:10px}
+.c-scroll::after{content:'';width:1px;height:42px;
+  background:linear-gradient(180deg,var(--gold),transparent)}
+
+/* ── a plain prose beat ── */
+.c-beat{padding:clamp(68px,8vw,112px) var(--m);max-width:1240px;margin:0 auto}
+.c-beat.narrow{max-width:960px}
+.c-no{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.18em;
+  color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:13px}
+.c-no::after{content:'';height:1px;flex:1;
+  background:linear-gradient(90deg,var(--case-rule),transparent)}
+.c-beat h2{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(30px,4.6vw,56px);line-height:.95;letter-spacing:-.015em;
+  max-width:18ch;text-wrap:balance}
+.c-beat p{margin-top:22px;max-width:58ch;font-size:clamp(15px,1.45vw,17.5px);
+  line-height:1.72;color:rgba(255,255,255,.72)}
+.c-beat p + p{margin-top:17px}
+
+/* ── the idea: one oversized statement over a full-bleed frame ── */
+.c-idea{position:relative;padding:clamp(76px,9vw,124px) var(--m);text-align:center;
+  background:linear-gradient(180deg,var(--navy-deep),var(--navy) 50%,var(--navy-deep));
+  border-top:1px solid var(--case-rule);border-bottom:1px solid var(--case-rule)}
+.c-idea .c-ar{display:block;font-size:clamp(28px,5.4vw,66px);font-weight:600;
+  line-height:1.42;color:var(--gold);direction:rtl}
+.c-idea .en{display:block;margin-top:16px;font-family:var(--display);font-weight:800;
+  text-transform:uppercase;font-size:clamp(24px,4.2vw,52px);line-height:1;letter-spacing:-.01em}
+.c-idea p{margin:34px auto 0;max-width:52ch;font-size:clamp(15px,1.45vw,17.5px);
+  line-height:1.72;color:rgba(255,255,255,.66)}
+
+/* ── pinned column with a stack of frames beside it ── */
+.c-pin{padding:0 var(--m) clamp(80px,10vw,130px);max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(30px,5vw,76px);align-items:start}
+.c-pin-side{position:sticky;top:clamp(96px,14vh,150px)}
+.c-pin-side ul{list-style:none;margin-top:30px;display:grid;gap:17px}
+.c-pin-side li{position:relative;padding-left:26px;font-size:15px;line-height:1.66;
+  color:rgba(255,255,255,.74)}
+.c-pin-side li::before{content:'';position:absolute;left:0;top:10px;width:9px;height:1px;
+  background:var(--gold)}
+.c-stack{display:grid;gap:clamp(18px,2.4vw,30px)}
+.c-stack img{width:100%;height:auto;border-radius:3px;
+  box-shadow:0 30px 64px -22px rgba(0,0,0,.66)}
+
+/* ── a pair, and a trio ── */
+.c-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px);
+  max-width:1240px;margin:0 auto;padding:0 var(--m)}
+.c-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px);
+  max-width:1240px;margin:0 auto;padding:0 var(--m)}
+.c-pair img,.c-trio img{width:100%;height:auto;border-radius:3px;
+  box-shadow:0 26px 56px -22px rgba(0,0,0,.6)}
+.c-cap{margin:16px auto 0;max-width:1240px;padding:0 var(--m);
+  font-size:12.5px;letter-spacing:.02em;color:rgba(255,255,255,.44)}
+
+/* ── the full set ── */
+.c-set{padding:clamp(80px,10vw,130px) var(--m) clamp(86px,11vw,140px);
+  max-width:1240px;margin:0 auto}
+.c-set-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  flex-wrap:wrap;padding-bottom:16px;margin-bottom:28px;border-bottom:1px solid var(--case-rule)}
+.c-set-head h2{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(28px,4.4vw,46px);line-height:1}
+.c-set-head span{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold)}
+.c-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,18px)}
+.c-grid img{width:100%;height:auto;border-radius:2px;opacity:.9;
+  transition:opacity .4s ease,transform .4s ease}
+.c-grid a:hover img,.c-grid a:focus-visible img{opacity:1;transform:translateY(-4px)}
+
+/* ── close ── */
+.c-end{padding:clamp(78px,9.5vw,128px) var(--m);text-align:center;
+  background:radial-gradient(100% 120% at 50% 0%,var(--navy) 0%,var(--navy-deep) 70%);
+  border-top:1px solid var(--case-rule)}
+.c-end h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(32px,5.6vw,66px);line-height:.94;letter-spacing:-.018em;
+  max-width:16ch;margin:0 auto;text-wrap:balance}
+.c-end p{margin:20px auto 0;max-width:44ch;font-size:16px;line-height:1.66;
+  color:rgba(255,255,255,.66)}
+.c-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+.c-cta a{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:2px;
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .25s ease,color .25s ease,border-color .25s ease}
+.c-cta .gold{background:var(--gold);color:var(--navy-deep)}
+.c-cta .gold:hover{background:#fff}
+.c-cta .ghost{border:1px solid var(--case-rule);color:#fff}
+.c-cta .ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── narrow ── */
+@media (max-width:980px){
+  .c-hero-in{grid-template-columns:1fr;gap:38px}
+  .c-hero-art{max-width:460px}
+  .c-pin{grid-template-columns:1fr;gap:34px}
+  .c-pin-side{position:static}
+  .c-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:620px){
+  .c-hero{min-height:auto;padding-top:128px}
+  .c-pair,.c-trio{grid-template-columns:1fr}
+  .c-grid{grid-template-columns:repeat(2,1fr)}
+  .c-facts{gap:22px 32px}
+  .c-scroll{display:none}
+}
+</style>
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a class="mark" href="index.html">
+    <img src="assets/brand/logo-dark-nav.png" width="561" height="124"
+         alt="Markadia — Designed to Make a Mark.">
+  </a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html" aria-current="page">Work</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">Studio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+  <!-- ── hero ───────────────────────────────────────────── -->
+  <header class="c-hero">
+    <div class="c-hero-in">
+      <div>
+        <div class="c-kicker rv">Case study · Finance &amp; Investment</div>
+        <h1 class="rv d1">Tharaa<br><em>Precious Metals</em></h1>
+        <p class="c-sub rv d2">A gold and silver app launching in the UAE, where a
+          customer can start at one dirham. We built the launch identity and the
+          first season of social, in <span class="c-ar" dir="rtl">العربية</span>,
+          English and Hindi.</p>
+        <div class="c-facts rv d3">
+          <div><span>Client</span><b>Tharaa Precious Metals</b></div>
+          <div><span>Market</span><b>United Arab Emirates</b></div>
+          <div><span>Scope</span><b>Launch system, social</b></div>
+          <div><span>Set</span><b>12 pieces</b></div>
+        </div>
+      </div>
+      <div class="c-hero-art rv d2">
+        <img src="assets/portfolio/tharaa-02.jpg" width="1080" height="1350"
+             alt="Tharaa launch key visual: a single gold one-dirham coin displayed in a museum case behind a velvet rope."
+             fetchpriority="high" decoding="async">
+      </div>
+    </div>
+    <div class="c-scroll" aria-hidden="true">Scroll</div>
+  </header>
+
+  <!-- ── 01 the situation ───────────────────────────────── -->
+  <section class="c-beat narrow">
+    <div class="c-no rv">01 / The situation</div>
+    <h2 class="rv">Every gold app in the Gulf looks like a bank</h2>
+    <p class="rv d1">Search the category and the same three pictures come back. A vault
+      door. A ticker chart in green and red. A bar of bullion lit like evidence in a
+      case file. The market had agreed that trust looks like an institution, and every
+      new entrant was copying the agreement.</p>
+    <p class="rv d1">Tharaa was arriving with a promise none of those pictures could
+      carry. You can start with one dirham. The design problem was to give that single
+      dirham the weight of something worth owning, before anyone had heard the name.</p>
+  </section>
+
+  <!-- ── 02 the idea ────────────────────────────────────── -->
+  <section class="c-idea">
+    <div class="rv">
+      <span class="c-ar" dir="rtl">ثراء … كل درهم له مكانه</span>
+      <span class="en">Every dirham has its place</span>
+    </div>
+    <p class="rv d1">So the launch image is one coin in a museum case, roped off, lit
+      from above. The amount is small on purpose. The treatment is not.</p>
+  </section>
+
+  <!-- ── 03 the system ──────────────────────────────────── -->
+  <section class="c-pin" style="padding-top:clamp(80px,10vw,130px)">
+    <div class="c-pin-side">
+      <div class="c-no rv">02 / The system</div>
+      <h2 class="rv" style="font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(28px,3.6vw,44px);line-height:.96;letter-spacing:-.015em">Navy and gold, rendered rather than photographed</h2>
+      <ul>
+        <li class="rv d1">One navy ground across every piece, so a post is recognisable
+          in the feed before the logo is read.</li>
+        <li class="rv d1">Gold is the subject of the frame. It carries the message and
+          sits at the centre of it.</li>
+        <li class="rv d2">Everything is built in 3D, which lets a one-dirham coin be lit
+          with the same care as a kilo bar.</li>
+        <li class="rv d2">Arabic and English are set together in the layout. Neither one
+          is added afterwards.</li>
+      </ul>
+    </div>
+    <div class="c-stack">
+      <img class="rv" src="assets/portfolio/tharaa-01.jpg" width="1080" height="1350"
+           alt="Tharaa social post: Start Your Wealth Journey, a gold car, bars, house and money bag on a ribbon path above a phone."
+           loading="lazy" decoding="async">
+      <img class="rv" src="assets/portfolio/tharaa-07.jpg" width="1080" height="1350"
+           alt="Tharaa social post in the launch system."
+           loading="lazy" decoding="async">
+    </div>
+  </section>
+
+  <!-- ── 04 three languages ─────────────────────────────── -->
+  <section class="c-beat narrow">
+    <div class="c-no rv">03 / Three languages</div>
+    <h2 class="rv">The buyer in Dubai is not one person</h2>
+    <p class="rv d1">Arabic and English carry the product across the whole calendar.
+      Hindi carries the occasions, because a large share of the people buying gold in
+      the Emirates are buying it for a date in their own calendar. Dhanteras is the day
+      gold is bought. That post is written in the language it is celebrated in.</p>
+  </section>
+  <div class="c-pair">
+    <img class="rv" src="assets/portfolio/tharaa-12.jpg" width="1080" height="1350"
+         alt="Tharaa Dhanteras post in English and Hindi, with a gold kalash, diyas and coins."
+         loading="lazy" decoding="async">
+    <img class="rv d1" src="assets/portfolio/tharaa-04.jpg" width="1080" height="1350"
+         alt="Tharaa occasion post from the launch season."
+         loading="lazy" decoding="async">
+  </div>
+  <p class="c-cap rv">Occasion posts. Written for the day, not translated into it.</p>
+
+  <!-- ── 05 teaching ────────────────────────────────────── -->
+  <section class="c-beat narrow">
+    <div class="c-no rv">04 / Teaching before asking</div>
+    <h2 class="rv">Nobody buys 999.9 until somebody explains it</h2>
+    <p class="rv d1">Close to half the first season is education. What the purity number
+      means. What separates 24K from 22K and 21K. What a gram is worth this morning. A
+      first-time buyer arrives with questions they are slightly embarrassed to ask, and
+      the brand that answers them is the brand they open when they are ready.</p>
+  </section>
+  <div class="c-pair">
+    <img class="rv" src="assets/portfolio/tharaa-09.jpg" width="1080" height="1350"
+         alt="Tharaa education post: What does 999.9 mean, explained in English and Arabic, with 3D gold numerals."
+         loading="lazy" decoding="async">
+    <img class="rv d1" src="assets/portfolio/tharaa-10.jpg" width="1080" height="1350"
+         alt="Tharaa education post: Gold purity, what is the difference, with 24K, 22K and 21K on podiums."
+         loading="lazy" decoding="async">
+  </div>
+  <p class="c-cap rv">Education posts. The questions a first-time buyer will not ask out loud.</p>
+
+  <!-- ── 06 the product ─────────────────────────────────── -->
+  <section class="c-beat narrow">
+    <div class="c-no rv">05 / Then the ask</div>
+    <h2 class="rv">The app appears once the question is answered</h2>
+    <p class="rv d1">Product posts sit late in the sequence, numbered so the series reads
+      in order. By the time the buy screen is shown, the audience already knows what
+      purity is, what a gram costs, and why one dirham is a real holding rather than a
+      gesture.</p>
+  </section>
+  <div class="c-trio">
+    <img class="rv" src="assets/portfolio/tharaa-06.jpg" width="1080" height="1350"
+         alt="Tharaa product post: Buy gold or silver from AED 1, shown on the app's buy screen."
+         loading="lazy" decoding="async">
+    <img class="rv d1" src="assets/portfolio/tharaa-05.jpg" width="1080" height="1350"
+         alt="Tharaa product post from the launch season."
+         loading="lazy" decoding="async">
+    <img class="rv d2" src="assets/portfolio/tharaa-11.jpg" width="1080" height="1350"
+         alt="Tharaa product post from the launch season."
+         loading="lazy" decoding="async">
+  </div>
+  <p class="c-cap rv">Product posts, numbered so the series reads in order.</p>
+
+  <!-- ── the full set ───────────────────────────────────── -->
+  <section class="c-set">
+    <div class="c-set-head">
+      <h2 class="rv">The launch set</h2>
+      <span class="rv">12 pieces</span>
+    </div>
+    <div class="c-grid" id="cgrid"></div>
+  </section>
+
+  <!-- ── close ──────────────────────────────────────────── -->
+  <section class="c-end">
+    <h2 class="rv">Markadia builds launch systems like this one</h2>
+    <p class="rv d1">Brand, campaign and social, in Arabic and English.
+      Cairo, Riyadh, Dubai.</p>
+    <div class="c-cta rv d2">
+      <a class="gold" href="contact.html">Start a project</a>
+      <a class="ghost" href="portfolio.html">See more work</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>© <span id="yr">2026</span> Markadia — Designed to Make a Mark.</div>
+  <div class="fl">
+    <a href="mailto:info@markadiawave.com">info@markadiawave.com</a>
+    <a href="https://www.instagram.com/Markadiaagency" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/markadiaagency" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.facebook.com/profile.php?id=61589182690085" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+<script>
+(() => {
+"use strict";
+
+/* The full set, built from the filenames so the markup stays short. */
+const grid = document.getElementById("cgrid");
+if (grid) {
+  grid.innerHTML = Array.from({ length: 12 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return `<a href="portfolio.html" aria-label="Tharaa piece ${n}, see the full set on the work page">
+      <img src="assets/portfolio/tharaa-${n}-thumb.jpg" width="640" height="800"
+           alt="Tharaa launch campaign design ${n}" loading="lazy" decoding="async"></a>`;
+  }).join("");
+}
+
+/* Reveal on entry. An observer rather than a scroll handler, so nothing runs
+   between sections, and the whole page is already visible without motion when
+   the browser is asked to reduce it. */
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const items = document.querySelectorAll(".rv");
+if (reduce) {
+  items.forEach(el => el.classList.add("in"));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+  items.forEach(el => io.observe(el));
+}
+})();
+</script>
+</body>
+</html>
